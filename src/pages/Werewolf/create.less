@@ -1,5 +1,6 @@
 @import '../../styles/mixins/button.less';
 @import '../../styles/mixins/shadow.less';
+@import '../../styles/mixins/radius.less';
 @import '../../styles/index.less';
 
 @margin: 6vw;
@@ -7,7 +8,6 @@
 @button-width: (100vw - @charaters-between - 2 * @margin) / 4;
 @button-height: 20vh;
 @button-margin: (25vw - @button-width) / 5;
-@button-radius: 20px;
 
 @badge-height: 10vh;
 
@@ -44,6 +44,7 @@
     margin: 0 @margin 0 @margin;
 
     &-button {
+      .radius.normal();
       // .shadow.card-1();
       display: block;
       flex: 1 1 auto;
@@ -53,7 +54,6 @@
       min-height: @button-height;
       margin: @button-margin;
       padding: 0;
-      border-radius: @button-radius;
 
       &:after {
         border: none;
@@ -61,11 +61,11 @@
     }
 
     &-img {
+      .radius.normal();
       display: block;
       width: @button-width;
       height: @button-height;
       overflow: hidden;
-      border-radius: @button-radius;
     }
   }
 
@@ -74,9 +74,9 @@
     height: @badge-height / 2;
 
     &-badge {
+      .radius.round();
       .shadow.card-3();
       position: relative;
-      border-radius: 3vw;
       bottom: @badge-height / 4;
       height: @badge-height;
       width: @badge-height;

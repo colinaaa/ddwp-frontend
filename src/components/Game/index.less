@@ -1,2 +1,18 @@
-.root {
+.game {
+  &-root {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  &-btn {
+    flex: 1 0 auto;
+    width: 80vw;
+    background-color: #f1f1f1;
+    margin: 2vh 0 2vh 0;
+
+    &:after {
+      border: none;
+    }
+  }
 }

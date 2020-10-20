@@ -1,7 +1,7 @@
 import { View, Button } from '@tarojs/components';
 import Taro, { FC, setNavigationBarTitle, showModal, navigateTo } from '@tarojs/taro';
 
-import classes from './index.less';
+import './index.less';
 
 interface Props {
   // 游戏名称
@@ -16,10 +16,13 @@ const Game: FC<Props> = ({ name }) => {
   };
 
   return (
-    <View className={classes.root}>
-      <Button onClick={handleCreate}>创建房间</Button>
+    <View className='game-root'>
+      <Button className='game-btn' onClick={handleCreate}>
+        创建房间
+      </Button>
 
       <Button
+        className='game-btn'
         onClick={() =>
           // TODO: use own Modal
           showModal({
@@ -31,6 +34,7 @@ const Game: FC<Props> = ({ name }) => {
       </Button>
 
       <Button
+        className='game-btn'
         onClick={() =>
           // TODO: use own modal
           showModal({ title: '游戏简介' })

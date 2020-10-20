@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import Taro, { Component, Config } from '@tarojs/taro';
-import { View, Text } from '@tarojs/components';
+import { View, Text, Image } from '@tarojs/components';
 
 import { Game } from '@components/game';
+import { wolfWhite } from '@static/werewolf';
 
 import './index.less';
 
@@ -20,14 +21,18 @@ export default class Werewolf extends Component {
 
   config: Config = {
     navigationBarTitleText: '狼人杀',
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#ffffff',
   };
 
   render() {
     return (
-      <View className='Werewolf'>
-        <Text>Hello world!</Text>
-        <Game name='狼人杀' />
+      <View className='werewolf-root'>
+        <View className='werewolf-image-container'>
+          <Image className='werewolf-img' src={wolfWhite} />
+        </View>
+        <View className='werewolf-action'>
+          <Game name='狼人杀' />
+        </View>
       </View>
     );
   }
