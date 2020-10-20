@@ -1,6 +1,19 @@
-.card {
+@import '../../styles/index.less';
+@rows-num: 3;
+
+.gamecard {
   &-root {
     background-color: whitesmoke;
     max-width: 100%;
+
+    & > button {
+      .flex-center();
+      min-height: 95vh / @rows-num;
+      margin: 10px;
+
+      &:after {
+        border: none;
+      }
+    }
   }
 }

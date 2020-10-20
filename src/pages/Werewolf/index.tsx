@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import Taro, { Component, Config } from '@tarojs/taro';
-import { View, Text, Image } from '@tarojs/components';
+import { View, Image } from '@tarojs/components';
 
 import { Game } from '@components/game';
 import { wolfWhite } from '@static/werewolf';

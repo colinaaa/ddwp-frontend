@@ -1,18 +1,14 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable react/no-deprecated */
 import Taro, { Component, Config } from '@tarojs/taro';
-import { View, Button } from '@tarojs/components';
+import { View } from '@tarojs/components';
 
 import GameCard from '@components/GameCard/index';
 import { cardNames } from '@config/const';
 
-import classes from './index.less';
+import './index.less';
 
 export default class Index extends Component {
-  state = {
-    cnt: 0,
-    open: true,
-    aa: 0,
-  };
-
   componentWillMount() {}
 
   componentDidMount() {}
@@ -34,20 +30,16 @@ export default class Index extends Component {
     navigationBarTitleText: '首页',
   };
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
   render() {
     return (
-      <View className={classes.root}>
-        <View className={classes.cards}>
+      <View className='index-root'>
+        <View className='index-cards'>
           {cardNames.map((name) => (
-            <View key={name} className={classes.card}>
+            <View key={name} className='index-card'>
               <GameCard name={name} />
             </View>
           ))}
         </View>
-        <Button onClick={() => this.setState({ open: true })}>open</Button>
       </View>
     );
   }

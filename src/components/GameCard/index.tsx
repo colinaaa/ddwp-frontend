@@ -4,7 +4,7 @@ import { View, Button, Text } from '@tarojs/components';
 import { getRoute } from '@config/const';
 import { useQuery } from '@hooks/useQuery';
 
-import classes from './index.less';
+import './index.less';
 
 interface Props {
   name: string;
@@ -26,7 +26,7 @@ const Card: FC<Props> = ({ name }: Props) => {
   // }
 
   return (
-    <View className={classes.root}>
+    <View className='gamecard-root'>
       {/* {data.allRooms.map((room) => (
         <Text key={room.roomNumber}>{room.roomNumber}</Text>
       ))} */}
