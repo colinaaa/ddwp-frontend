@@ -107,6 +107,6 @@
     "stylelint": "9.3.0",
     "stylelint-config-taro-rn": "2.2.15",
     "stylelint-taro-rn": "2.2.15",
-    "typescript": "^3.0.1"
+    "typescript": "^4.0.3"
   }
 }
