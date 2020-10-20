@@ -2,7 +2,7 @@
   "name": "ddwp-frontend",
   "version": "0.0.1",
   "private": true,
-  "description": "A mini-program for baidu contest",
+  "description": "A mini-program for baidu competition",
   "templateInfo": {
     "name": "default",
     "typescript": true,
@@ -26,7 +26,7 @@
   },
   "scripts": {
     "dump": "apollo client:download-schema",
-    "dump:gql": "yarn dump schema.graphql",
+    "graphql:dump": "yarn dump schema.graphql",
     "gen": "apollo client:codegen --target typescript",
     "lint": "eslint --fix .",
     "build:weapp": "taro build --type weapp",
