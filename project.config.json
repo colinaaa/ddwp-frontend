@@ -1,8 +1,8 @@
 {
   "miniprogramRoot": "./dist",
-  "projectname": "newfront",
-  "description": "",
-  "appid": "touristappid",
+  "projectname": "ddwp-front",
+  "description": "A mini-program for baidu contest",
+  "appid": "22850332",
   "setting": {
     "urlCheck": true,
     "es6": false,
