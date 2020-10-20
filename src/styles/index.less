@@ -1,0 +1,21 @@
+@global-margin: 3vw;
+
+.global {
+  .margin() {
+    margin: @global-margin;
+  }
+
+  .h-margin() {
+    margin: 0 @global-margin 0 @global-margin;
+  }
+
+  .v-margin() {
+    margin: @global-margin 0 @global-margin 0;
+  }
+}
+
+.flex-center() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

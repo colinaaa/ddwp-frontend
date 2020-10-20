@@ -1,0 +1,21 @@
+@radius: 20px;
+@font-size: 0.8rem;
+
+.button-confirm {
+  .button-normal();
+  color: white;
+  background-color: black;
+}
+
+.button-normal {
+  font-size: @font-size;
+
+  color: black;
+  width: max-content;
+  background-color: whitesmoke;
+  border-radius: @radius;
+
+  &::after {
+    border: none;
+  }
+}
