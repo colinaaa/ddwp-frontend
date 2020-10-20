@@ -31,6 +31,9 @@ const Game: FC<Props> = ({ name }) => {
     setRoomNumber(e.detail.value);
   }, []);
 
+  // BUG(2020-10-20): input something and not click confirm but somewhere in modal to
+  //      close input. then re-enter the input will cause value dispear and
+  //      input closed, but all states preserved.
   return (
     <View className='game-root'>
       {open && (
