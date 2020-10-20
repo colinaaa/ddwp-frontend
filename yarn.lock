@@ -6381,6 +6381,13 @@ eslint-plugin-taro@2.2.15:
   dependencies:
     has "^1.0.1"
 
+eslint-plugin-taro@3.0.14:
+  version "3.0.14"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-taro/-/eslint-plugin-taro-3.0.14.tgz#518ed3e04c1c36caf889f61d74be9d9a6e27a2de"
+  integrity sha512-ZfWplNajqKJHQN9OklDkgwt/ppChFpvOsWzxLpf9gQCTBD3pAOlnjfZhNviK5cwmSy9GxYFQGktnp//aJjLYUg==
+  dependencies:
+    has "^1.0.1"
+
 eslint-plugin-typescript@^0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-typescript/-/eslint-plugin-typescript-0.12.0.tgz#e23d58cb27fe28e89fc641a1f20e8d862cb99aef"
