@@ -53,7 +53,7 @@
     "@tarojs/cli": "2.2.15",
     "@tarojs/components": "2.2.15",
     "@tarojs/components-qa": "2.2.15",
-    "@tarojs/router": "2.2.15",
+    "@tarojs/router": "3.0.14",
     "@tarojs/taro": "2.2.15",
     "@tarojs/taro-alipay": "2.2.15",
     "@tarojs/taro-h5": "2.2.15",
