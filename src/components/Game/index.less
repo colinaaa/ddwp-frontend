@@ -1,3 +1,6 @@
+@import '../../styles/index.less';
+@import '../../styles/mixins/radius.less';
+
 .game {
   &-root {
     display: flex;
@@ -13,6 +16,22 @@
 
     &:after {
       border: none;
+    }
+  }
+
+  &-modal {
+    &-input {
+      .flex-center();
+      .radius.round();
+      text-align: center;
+      margin: 4vw;
+      padding: 1.5vh;
+      background-color: #f5f5f5;
+
+      &-placeholder {
+        color: #808080;
+        font-size: small;
+      }
     }
   }
 }
