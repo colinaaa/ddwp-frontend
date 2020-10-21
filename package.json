@@ -57,7 +57,7 @@
   "license": "MIT",
   "dependencies": {
     "@tarojs/cli": "2.2.15",
-    "@tarojs/components": "2.2.15",
+    "@tarojs/components": "3.0.14",
     "@tarojs/components-qa": "2.2.15",
     "@tarojs/router": "2.2.15",
     "@tarojs/taro": "2.2.15",
