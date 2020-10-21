@@ -21,7 +21,11 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged && yarn build:swan"
+      "pre-commit": "lint-staged && yarn build:swan",
+      "pre-push": "echo $HUSKY_GIT_STDIN | scripts/hooks/pre-push-lfs.sh $HUSKY_GIT_PARAMS",
+      "post-checkout": "echo $HUSKY_GIT_STDIN | scripts/hooks/post-checkout-lfs.sh $HUSKY_GIT_PARAMS",
+      "post-commit": "echo $HUSKY_GIT_STDIN | scripts/hooks/post-commit-lfs.sh $HUSKY_GIT_PARAMS",
+      "post-merge": "echo $HUSKY_GIT_STDIN | scripts/hooks/post-merge-lfs.sh $HUSKY_GIT_PARAMS"
     }
   },
   "scripts": {
