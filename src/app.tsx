@@ -3,6 +3,7 @@ import Taro, { Component, Config } from '@tarojs/taro';
 
 import Index from './pages/index';
 
+import 'normalize.css';
 import './app.less';
 // 如果需要在 h5 环境中开启 Taro Devtools
 // 取消以下注释：
@@ -50,4 +51,5 @@ class App extends Component {
   }
 }
 
+// eslint-disable-next-line react/no-deprecated
 Taro.render(<App />, document.getElementById('app'));
