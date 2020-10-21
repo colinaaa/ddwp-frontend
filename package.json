@@ -16,12 +16,16 @@
     }
   ],
   "lint-staged": {
-    "*.ts": "yarn lint"
+    "*.{ts,tsx}": "yarn lint"
   },
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged && yarn build:swan"
+      "pre-commit": "lint-staged && yarn build:swan",
+      "pre-push": "echo $HUSKY_GIT_STDIN | scripts/hooks/pre-push-lfs.sh $HUSKY_GIT_PARAMS",
+      "post-checkout": "echo $HUSKY_GIT_STDIN | scripts/hooks/post-checkout-lfs.sh $HUSKY_GIT_PARAMS",
+      "post-commit": "echo $HUSKY_GIT_STDIN | scripts/hooks/post-commit-lfs.sh $HUSKY_GIT_PARAMS",
+      "post-merge": "echo $HUSKY_GIT_STDIN | scripts/hooks/post-merge-lfs.sh $HUSKY_GIT_PARAMS"
     }
   },
   "scripts": {
@@ -29,6 +33,7 @@
     "graphql:dump": "yarn dump schema.graphql",
     "gen": "apollo client:codegen --target typescript",
     "lint": "eslint --fix .",
+    "build": "yarn build:swan",
     "build:weapp": "taro build --type weapp",
     "build:swan": "taro build --type swan",
     "build:alipay": "taro build --type alipay",
@@ -38,6 +43,7 @@
     "build:qq": "taro build --type qq",
     "build:jd": "taro build --type jd",
     "build:quickapp": "taro build --type quickapp",
+    "start": "yarn dev:swan",
     "dev:weapp": "yarn build:weapp --watch",
     "dev:swan": "yarn build:swan --watch",
     "dev:alipay": "yarn build:alipay --watch",
@@ -68,6 +74,7 @@
     "graphql": "^15.3.0",
     "nerv-devtools": "^1.5.5",
     "nervjs": "^1.5.5",
+    "normalize.css": "^8.0.1",
     "react": "^16.14.0",
     "regenerator-runtime": "0.11.1",
     "subscriptions-transport-ws": "^0.9.18",
@@ -78,7 +85,7 @@
     "@commitlint/config-conventional": "^11.0.0",
     "@tarojs/mini-runner": "2.2.15",
     "@tarojs/plugin-less": "2.2.15",
-    "@tarojs/plugin-terser": "2.2.15",
+    "@tarojs/plugin-terser": "^2.2.10",
     "@tarojs/webpack-runner": "2.2.15",
     "@types/classnames": "^2.2.10",
     "@types/react": "^16.9.53",
@@ -107,6 +114,7 @@
     "stylelint": "9.3.0",
     "stylelint-config-taro-rn": "2.2.15",
     "stylelint-taro-rn": "2.2.15",
-    "typescript": "^4.0.3"
+    "typescript": "^4.0.3",
+    "webpack-bundle-analyzer": "^3.9.0"
   }
 }
