@@ -4,17 +4,24 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: getAllRooms
+// GraphQL mutation operation: createRoom
 // ====================================================
 
-export interface getAllRooms_allRooms {
+export interface createRoom_createRoom {
   __typename: "WerewolfRoom";
   /**
    * 房间号
    */
   roomNumber: number;
+  /**
+   * 玩家人数
+   */
+  playersNumber: number;
 }
 
-export interface getAllRooms {
-  allRooms: getAllRooms_allRooms[] | null;
+export interface createRoom {
+  /**
+   * 创建房间
+   */
+  createRoom: createRoom_createRoom;
 }

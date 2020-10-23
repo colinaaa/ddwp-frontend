@@ -1,0 +1,38 @@
+@import '../../styles/index.less';
+
+@width: 90vw;
+@card-width: 20vw;
+@card-margin: (@width - (@card-width * 4)) / 5;
+
+.room {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  &-number {
+    .flex-center();
+    min-height: 12vh;
+    font-size: large;
+    width: @width;
+  }
+
+  &-action {
+    width: max-content;
+    min-height: 12vh;
+  }
+
+  &-charaters {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: @width;
+    min-height: 70vh;
+
+    &-card {
+      .flex-center();
+      flex: 0 0 auto;
+      width: @card-width;
+      margin: 0 @card-margin 0 @card-margin;
+    }
+  }
+}

@@ -77,7 +77,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "Room",
+                  "name": "WerewolfRoom",
                   "ofType": null
                 }
               }
@@ -97,7 +97,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "SCALAR",
-                    "name": "Float",
+                    "name": "Int",
                     "ofType": null
                   }
                 },
@@ -109,7 +109,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "Room",
+                "name": "WerewolfRoom",
                 "ofType": null
               }
             },
@@ -134,8 +134,8 @@
       },
       {
         "kind": "SCALAR",
-        "name": "Float",
-        "description": "The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).",
+        "name": "Int",
+        "description": "The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -219,7 +219,180 @@
       },
       {
         "kind": "OBJECT",
-        "name": "Room",
+        "name": "WerewolfRoom",
+        "description": "狼人杀房间",
+        "fields": [
+          {
+            "name": "roomNumber",
+            "description": "房间号",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "password",
+            "description": "密码",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "playersNumber",
+            "description": "玩家人数",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "gameType",
+            "description": "游戏类型",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "GameType",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "lineup",
+            "description": "阵容",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "LineUp",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "改为多个游戏，使用GameConfig"
+          },
+          {
+            "name": "players",
+            "description": "玩家信息",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Player",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "isBegin",
+            "description": "是否开始",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "isEnd",
+            "description": "是否结束",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "gameConfig",
+            "description": "狼人杀游戏配置",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "WerewolfConfig",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [
+          {
+            "kind": "INTERFACE",
+            "name": "IRoom",
+            "ofType": null
+          }
+        ],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "Float",
+        "description": "The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "Boolean",
+        "description": "The `Boolean` scalar type represents `true` or `false`.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INTERFACE",
+        "name": "IRoom",
         "description": " 游戏房间",
         "fields": [
           {
@@ -271,20 +444,32 @@
             "deprecationReason": null
           },
           {
-            "name": "lineup",
-            "description": "阵容",
+            "name": "gameType",
+            "description": "游戏类型",
             "args": [],
             "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
                 "kind": "ENUM",
-                "name": "LineUp",
+                "name": "GameType",
                 "ofType": null
               }
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "lineup",
+            "description": "阵容",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "LineUp",
+              "ofType": null
+            },
+            "isDeprecated": true,
+            "deprecationReason": "改为多个游戏，使用GameConfig"
           },
           {
             "name": "players",
@@ -334,16 +519,53 @@
         "inputFields": null,
         "interfaces": [],
         "enumValues": null,
-        "possibleTypes": null
+        "possibleTypes": [
+          {
+            "kind": "OBJECT",
+            "name": "WerewolfRoom",
+            "ofType": null
+          }
+        ]
       },
       {
-        "kind": "SCALAR",
-        "name": "Boolean",
-        "description": "The `Boolean` scalar type represents `true` or `false`.",
+        "kind": "ENUM",
+        "name": "GameType",
+        "description": "游戏类型",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
-        "enumValues": null,
+        "enumValues": [
+          {
+            "name": "UNO",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "Avalon",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "Werewolf",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "Undercover",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "GermanHeartDisease",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
         "possibleTypes": null
       },
       {
@@ -366,20 +588,16 @@
       {
         "kind": "OBJECT",
         "name": "Player",
-        "description": null,
+        "description": "游戏玩家",
         "fields": [
           {
             "name": "role",
             "description": "角色",
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "Role",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -407,50 +625,152 @@
         "possibleTypes": null
       },
       {
-        "kind": "ENUM",
-        "name": "Role",
-        "description": "狼人杀角色",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
+        "kind": "OBJECT",
+        "name": "WerewolfConfig",
+        "description": "狼人杀游戏配置",
+        "fields": [
           {
-            "name": "Villager",
-            "description": null,
+            "name": "totalNumber",
+            "description": "总人数",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "Werewolf",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "Prophet",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "Hunter",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "Witch",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "Idiot",
-            "description": null,
+            "name": "lineup",
+            "description": "阵容",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Role",
+                  "ofType": null
+                }
+              }
+            },
             "isDeprecated": false,
             "deprecationReason": null
           }
         ],
+        "inputFields": null,
+        "interfaces": [
+          {
+            "kind": "INTERFACE",
+            "name": "IGameConfig",
+            "ofType": null
+          }
+        ],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INTERFACE",
+        "name": "IGameConfig",
+        "description": "创建游戏配置",
+        "fields": [
+          {
+            "name": "totalNumber",
+            "description": "总人数",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "lineup",
+            "description": "阵容",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Role",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": [
+          {
+            "kind": "OBJECT",
+            "name": "WerewolfConfig",
+            "ofType": null
+          }
+        ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Role",
+        "description": "角色",
+        "fields": [
+          {
+            "name": "name",
+            "description": "角色名称",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "count",
+            "description": "角色数量",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
         "possibleTypes": null
       },
       {
@@ -463,14 +783,14 @@
             "description": "创建房间",
             "args": [
               {
-                "name": "lineup",
+                "name": "config",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
                   "ofType": {
-                    "kind": "SCALAR",
-                    "name": "Float",
+                    "kind": "INPUT_OBJECT",
+                    "name": "InputGameConfig",
                     "ofType": null
                   }
                 },
@@ -482,7 +802,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "Room",
+                "name": "WerewolfRoom",
                 "ofType": null
               }
             },
@@ -501,7 +821,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "SCALAR",
-                    "name": "Float",
+                    "name": "Int",
                     "ofType": null
                   }
                 },
@@ -513,7 +833,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "Room",
+                "name": "WerewolfRoom",
                 "ofType": null
               }
             },
@@ -544,7 +864,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "Room",
+                "name": "WerewolfRoom",
                 "ofType": null
               }
             },
@@ -589,7 +909,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "Room",
+                "name": "WerewolfRoom",
                 "ofType": null
               }
             },
@@ -599,6 +919,102 @@
         ],
         "inputFields": null,
         "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "InputGameConfig",
+        "description": "创建游戏配置",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "totalNumber",
+            "description": "总人数",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "gameType",
+            "description": "游戏类型",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "GameType",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lineup",
+            "description": "阵容",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "InputRole",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": "[]"
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "InputRole",
+        "description": "角色",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "name",
+            "description": "角色名称",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "count",
+            "description": "角色数量",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },

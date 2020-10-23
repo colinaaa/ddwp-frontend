@@ -7,8 +7,8 @@ type QueryKey = keyof typeof Query;
 
 type MutationKey = keyof typeof Mutation;
 
-const useQuery = (query: QueryKey) => {
-  return useApolloQuery(Query[query], { client });
+const useQuery = <Q, Arg>(query: QueryKey, args?: Arg) => {
+  return useApolloQuery<Q, Arg>(Query[query], { client, variables: args });
 };
 
 const useMutation = (mutation: MutationKey) => {
