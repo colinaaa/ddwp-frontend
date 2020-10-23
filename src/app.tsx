@@ -50,4 +50,5 @@ class App extends Component {
   }
 }
 
+// eslint-disable-next-line react/no-deprecated
 Taro.render(<App />, document.getElementById('app'));
