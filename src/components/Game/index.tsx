@@ -1,6 +1,6 @@
 import Modal from '@components/Modal';
 import { View, Button, Input } from '@tarojs/components';
-import Taro, { FC, setNavigationBarTitle, showModal, navigateTo, useState, useCallback } from '@tarojs/taro';
+import Taro, { FC, setNavigationBarTitle, showModal, navigateTo, useState, useCallback, useEffect } from '@tarojs/taro';
 
 import './index.less';
 
@@ -10,7 +10,9 @@ interface Props {
 }
 
 const Game: FC<Props> = ({ name }) => {
-  setNavigationBarTitle({ title: name });
+  useEffect(() => {
+    setNavigationBarTitle({ title: name });
+  }, []);
 
   const [open, setOpen] = useState(false);
   const [roomNumber, setRoomNumber] = useState('');

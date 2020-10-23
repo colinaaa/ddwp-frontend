@@ -10,5 +10,20 @@ import unknown from './unknown.png';
 import hunter from './hunter.png';
 import prophet from './prophet.png';
 import wolfWhite from './wolf-white.png';
+import cover from './cover.png';
 
-export { villager, unknown, unknown2, cupid, succubus, guard, wolfBlack, wolfWhite, idiot, witch, hunter, prophet };
+export {
+  villager,
+  unknown,
+  unknown2,
+  cupid,
+  succubus,
+  guard,
+  wolfBlack,
+  wolfWhite,
+  idiot,
+  witch,
+  hunter,
+  prophet,
+  cover,
+};

@@ -7,6 +7,17 @@
 // START Enums and Input Objects
 //==============================================================
 
+/**
+ * 游戏类型
+ */
+export enum GameType {
+  Avalon = "Avalon",
+  GermanHeartDisease = "GermanHeartDisease",
+  UNO = "UNO",
+  Undercover = "Undercover",
+  Werewolf = "Werewolf",
+}
+
 //==============================================================
 // END Enums and Input Objects
 //==============================================================
