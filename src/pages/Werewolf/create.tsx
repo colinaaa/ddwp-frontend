@@ -1,9 +1,9 @@
 import { Text, View, Button, Image } from '@tarojs/components';
-import Taro, { FC, useState, useCallback } from '@tarojs/taro';
+import Taro, { FC, useState, useCallback, navigateTo } from '@tarojs/taro';
 
 import Modal from '@components/Modal';
 import Card from '@components/Card';
-import { charaterNames, getImage } from './lineup';
+import { charaterNames, getImage, getImageFont } from './lineup';
 
 import './create.less';
 
@@ -17,51 +17,52 @@ const Create: FC = () => {
   const [current, setCurrent] = useState({ name: '', count: 0 });
   const [lineup, setLineup] = useState(Object.fromEntries(charaterNames.map((name) => [name, 0])));
 
-  console.log(Object.entries(lineup));
-
   const handleSelect = (name: string) => () => {
     console.log('name', name);
     setOpen(true);
     setCurrent({ name, count: lineup[name] });
   };
 
-  const handleConfirm = () => {
-    setCnt(cnt + +current.count);
+  const handleConfirm = useCallback(() => {
+    setCnt(cnt + (+current.count - lineup[current.name]));
     setLineup((lineup) => ({ ...lineup, [current.name]: +current.count }));
     setCurrent({ name: '', count: 0 });
-  };
+  }, [current.name, current.count, lineup]);
 
-  const handleInc = () => {
+  const handleInc = useCallback(() => {
     setCurrent((current) => ({ ...current, count: current.count + 1 }));
-  };
+  }, []);
 
-  const handleDec = () => {
+  const handleDec = useCallback(() => {
     if (current.count === 0) {
       return;
     }
     setCurrent((current) => ({ ...current, count: current.count - 1 }));
-  };
+  }, [current.count]);
 
-  const handleSubmit = () => {
-    console.log(lineup);
-  };
+  const handleSubmit = useCallback(() => {
+    navigateTo({ url: 'room?roomNumber=19254' });
+  }, []);
 
   const close = useCallback(() => setOpen(false), []);
   const card = (
     <View className='werewolf-root'>
       <Card>
         <View className='werewolf-total'>
-          <Text>总人数 {cnt}</Text>
+          <Text>总人数</Text>
+          <Text className='werewolf-total-cnt'>{cnt}人</Text>
         </View>
       </Card>
       <View className='werewolf-charaters'>
         {Object.entries(lineup).map((arr) => {
           const [name, num] = arr;
-          console.log(name, num);
           return (
-            <Button className='werewolf-charaters-button' key={name} onClick={handleSelect(name)}>
-              <Image className='werewolf-charaters-img' src={getImage(name)} />
-            </Button>
+            <View key={name}>
+              <Button className='werewolf-charaters-button' onClick={handleSelect(name)}>
+                <Image className='werewolf-charaters-img' src={getImageFont(name)} />
+              </Button>
+              <Text className='werewolf-charaters-cnt'>{num}</Text>
+            </View>
           );
         })}
       </View>
@@ -88,7 +89,7 @@ const Create: FC = () => {
       </Modal>
       <View className='werewolf-padding' />
       <View className='werewolf-footer'>
-        <Button onClick={handleSubmit}>确认</Button>
+        <Button onClick={handleSubmit}>确定阵容</Button>
         {/* <Button onClick={() => setOpen(!open)}>open</Button> */}
       </View>
     </View>

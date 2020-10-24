@@ -8,12 +8,8 @@ interface Props {
   width?: string;
 }
 
-const Card: FC<Props> = ({ children, width }) => {
-  return (
-    <View className='card' style={{ width }}>
-      {children}
-    </View>
-  );
+const Card: FC<Props> = ({ children }) => {
+  return <View className='card'>{children}</View>;
 };
 
 Card.externalClasses = ['werewolf-header'];
