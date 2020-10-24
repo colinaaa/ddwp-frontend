@@ -1,4 +1,8 @@
-import { useQuery as useApolloQuery, useMutation as useApolloMutation } from 'taro-apollo-client';
+import {
+  useQuery as useApolloQuery,
+  useMutation as useApolloMutation,
+  useLazyQuery as useApolloLazyQuery,
+} from 'taro-apollo-client';
 
 import { Query, Mutation } from '@services/graphql';
 import { client } from '@services/apollo';
@@ -7,12 +11,12 @@ type QueryKey = keyof typeof Query;
 
 type MutationKey = keyof typeof Mutation;
 
-const useQuery = <Q, Arg>(query: QueryKey, args?: Arg) => {
-  return useApolloQuery<Q, Arg>(Query[query], { client, variables: args });
-};
+const useLazyQuery = <Q, Arg>(query: QueryKey, args?: Arg) =>
+  useApolloLazyQuery<Q, Arg>(Query[query], { client, variables: args });
 
-const useMutation = (mutation: MutationKey) => {
-  return useApolloMutation(Mutation[mutation], { client });
-};
+const useQuery = <Q, Arg>(query: QueryKey, args?: Arg) =>
+  useApolloQuery<Q, Arg>(Query[query], { client, variables: args });
 
-export { useQuery, useMutation };
+const useMutation = <Q, Arg>(mutation: MutationKey) => useApolloMutation<Q, Arg>(Mutation[mutation], { client });
+
+export { useQuery, useMutation, useLazyQuery };

@@ -1,6 +1,4 @@
 import { gql } from 'taro-apollo-client';
-import { getRoom, getRoomVariables } from './__generated__/getRoom';
-import { getAllRooms } from './__generated__/getAllRooms';
 
 const GET_ALL_ROOMS = gql`
   query getAllRooms {
@@ -35,6 +33,6 @@ const GET_ROOM = gql`
 
 const Query = { GET_ALL_ROOMS, GET_ROOM };
 
-export { getRoom, getRoomVariables, getAllRooms, GET_ALL_ROOMS, GET_ROOM, Query };
+export { GET_ALL_ROOMS, GET_ROOM, Query };
 
 export default Query;

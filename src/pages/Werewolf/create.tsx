@@ -3,6 +3,9 @@ import Taro, { FC, useState, useCallback, navigateTo } from '@tarojs/taro';
 
 import Modal from '@components/Modal';
 import Card from '@components/Card';
+import { useMutation } from '@hooks/useQuery';
+import { createRoom as createRoomT, createRoomVariables, GameType } from '@services/graphql';
+
 import { charaterNames, getImage, getImageFont } from './lineup';
 
 import './create.less';
@@ -17,8 +20,16 @@ const Create: FC = () => {
   const [current, setCurrent] = useState({ name: '', count: 0 });
   const [lineup, setLineup] = useState(Object.fromEntries(charaterNames.map((name) => [name, 0])));
 
+  const [createRoom, { data }] = useMutation<createRoomT, createRoomVariables>('CREATE_ROOM');
+
+  if (data) {
+    const {
+      createRoom: { roomNumber },
+    } = data;
+    navigateTo({ url: `room?roomNumber=${roomNumber}` });
+  }
+
   const handleSelect = (name: string) => () => {
-    console.log('name', name);
     setOpen(true);
     setCurrent({ name, count: lineup[name] });
   };
@@ -40,9 +51,12 @@ const Create: FC = () => {
     setCurrent((current) => ({ ...current, count: current.count - 1 }));
   }, [current.count]);
 
-  const handleSubmit = useCallback(() => {
-    navigateTo({ url: 'room?roomNumber=19254' });
-  }, []);
+  const handleSubmit = async () => {
+    const l = Object.entries(lineup)
+      .filter(([, count]) => count !== 0)
+      .map(([name, count]) => ({ name, count }));
+    createRoom({ variables: { config: { totalNumber: cnt, gameType: GameType.Werewolf, lineup: l } } });
+  };
 
   const close = useCallback(() => setOpen(false), []);
   const card = (
