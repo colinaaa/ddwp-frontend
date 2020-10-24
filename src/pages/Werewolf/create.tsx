@@ -71,6 +71,7 @@ const Create: FC = () => {
         title={current.name}
         onClose={close}
         onConfirm={handleConfirm}
+        onlyConfirm
         renderBadge={
           <View className='werewolf-modal-header'>
             <Image className='werewolf-modal-header-badge' src={getImage(current.name)} />
