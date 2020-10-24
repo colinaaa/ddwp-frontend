@@ -1,4 +1,6 @@
 @import '../../styles/index.less';
+@import '../../styles/mixins/header-card.less';
+@import '../../styles/mixins/button.less';
 
 @width: 90vw;
 @card-width: 20vw;
@@ -10,14 +12,58 @@
   flex-direction: column;
   &-number {
     .flex-center();
-    min-height: 12vh;
-    font-size: large;
-    width: @width;
+    .header-card();
+    font-size: 20px;
+
+    &-span {
+      font-size: 35px;
+      margin-right: 11px;
+    }
   }
 
   &-action {
-    width: max-content;
-    min-height: 12vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 666px;
+    padding: 0 42px 0 42px;
+    height: 131px;
+
+    &-container {
+      .flex-center();
+    }
+
+    &-img {
+      width: 131px;
+      height: 131px;
+      margin-right: 21px;
+    }
+
+    &-id {
+      &-title {
+        font-size: 18px;
+        margin-bottom: 14px;
+      }
+
+      &-card {
+        .flex-center();
+        width: 131px;
+        height: 59px;
+        line-height: 59px;
+        background: #ffffff;
+        border-radius: 25px;
+      }
+    }
+
+    &-btn {
+      .button-confirm();
+      width: 241px;
+      height: 78px;
+      line-height: 78px;
+      background: #000000;
+      border-radius: 25px;
+      margin: 0;
+    }
   }
 
   &-charaters {

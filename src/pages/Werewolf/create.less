@@ -1,6 +1,7 @@
 @import '../../styles/mixins/button.less';
 @import '../../styles/mixins/shadow.less';
 @import '../../styles/mixins/radius.less';
+@import '../../styles/mixins/header-card.less';
 @import '../../styles/index.less';
 
 @margin: 6vw;
@@ -32,16 +33,10 @@
 
   &-total {
     .flex-center();
-    width: 664px;
-    height: 113px;
-    background: #ffffff;
-    box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.05);
-    border-radius: 25px;
-    font-size: 30px;
+    .header-card();
 
     &-cnt {
       margin-left: 30px;
-
       font-size: 35px;
     }
   }

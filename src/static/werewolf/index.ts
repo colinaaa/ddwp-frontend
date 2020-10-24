@@ -22,6 +22,7 @@ import prophet from './prophet.png';
 import prophetFont from './prophet-withfont.png';
 import wolfKingFont from './wolfking-withfont.png';
 import knightFont from './knight-withfont.png';
+import god from './god.png';
 
 import cover from './cover.png';
 
@@ -51,4 +52,5 @@ export {
   wolfKingFont,
   knightFont,
   cover,
+  god,
 };
