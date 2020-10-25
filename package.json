@@ -31,7 +31,7 @@
   "scripts": {
     "dump": "apollo client:download-schema",
     "graphql:dump": "yarn dump schema.graphql",
-    "gen": "apollo client:codegen --target typescript --outputFlat src/services/graphql/__generated__/index.ts",
+    "gen": "yarn dump && apollo client:codegen --target typescript --outputFlat src/services/graphql/__generated__/index.ts",
     "lint": "eslint --fix .",
     "build": "yarn build:swan",
     "build:weapp": "taro build --type weapp",

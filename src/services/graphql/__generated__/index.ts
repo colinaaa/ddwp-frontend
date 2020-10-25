@@ -144,6 +144,50 @@ export interface getRoomVariables {
 // @generated
 // This file was automatically generated and should not be edited.
 
+// ====================================================
+// GraphQL subscription operation: OnRoomUpdated
+// ====================================================
+
+export interface OnRoomUpdated_roomUpdated_players {
+  __typename: "Player";
+  /**
+   * 位置
+   */
+  position: number;
+}
+
+export interface OnRoomUpdated_roomUpdated {
+  __typename: "WerewolfRoom";
+  /**
+   * 房间号
+   */
+  roomNumber: number;
+  /**
+   * 玩家人数
+   */
+  playersNumber: number;
+  /**
+   * 玩家信息
+   */
+  players: OnRoomUpdated_roomUpdated_players[] | null;
+}
+
+export interface OnRoomUpdated {
+  /**
+   * 订阅狼人杀房间变化
+   */
+  roomUpdated: OnRoomUpdated_roomUpdated;
+}
+
+export interface OnRoomUpdatedVariables {
+  roomNumber: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
 //==============================================================
 // START Enums and Input Objects
 //==============================================================

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable react/no-deprecated */
-import Taro, { Component, Config } from '@tarojs/taro';
-import { View } from '@tarojs/components';
+import Taro, { Component, Config, navigateTo } from '@tarojs/taro';
+import { View, Button } from '@tarojs/components';
 
 import GameCard from '@components/GameCard/index';
 import { cardNames } from '@config/const';
@@ -40,6 +40,7 @@ export default class Index extends Component {
             </View>
           ))}
         </View>
+        <Button onClick={() => navigateTo({ url: '/pages/Werewolf/room?roomNumber=72369' })}>room</Button>
       </View>
     );
   }
