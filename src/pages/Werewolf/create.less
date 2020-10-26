@@ -83,11 +83,11 @@
   &-modal {
     &-header {
       .flex-center();
-      height: @badge-height / 2;
+      height: 0;
 
       &-badge {
-        position: relative;
-        bottom: @badge-height / 4;
+        // I dont know why here is -15%, it looks great
+        transform: translateY(-15%);
         height: @badge-height;
         width: @badge-width;
         // background: #ffffff;
@@ -114,6 +114,7 @@
       }
 
       & > button {
+        .flex-center();
         flex: 0 1 auto;
         height: 78px;
         width: 78px;

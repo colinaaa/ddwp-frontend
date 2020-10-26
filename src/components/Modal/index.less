@@ -39,22 +39,23 @@
   }
 
   &-container {
-    .radius.normal();
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: white;
     min-width: 664px;
-    min-height: 474px;
+    min-height: 393px;
+    border-radius: 25px;
     // overflow: hidden;
     margin: auto;
   }
 
   &-header {
     text-align: center;
-    margin-bottom: 3vh;
-    margin-top: 3vh;
 
     &-title {
       font-size: 35px;
@@ -63,7 +64,6 @@
 
     &-badge {
       margin-top: -50%;
-      margin-bottom: 10vh;
     }
   }
 
@@ -76,7 +76,6 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    margin: 42px 0 80px 0;
     width: 100%;
     font-size: 36px;
 
