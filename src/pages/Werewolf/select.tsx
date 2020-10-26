@@ -83,7 +83,7 @@ const Select: FC = () => {
   ]);
 
   const handleClose = useCallback(() => {
-    navigateTo({ url: `show?charater=${charater}&pos=${selected}` });
+    navigateTo({ url: `show?charater=${charater}&pos=${selected + 1}` });
   }, [charater, selected]);
 
   return (

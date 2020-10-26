@@ -38,6 +38,18 @@ import hunterSquare from './hunter-square.png';
 import prophetSquare from './prophet-square.png';
 import wolfKingSquare from './wolfking-square.png';
 import knightSquare from './knight-square.png';
+import villagerShow from './villager-show.png';
+import cupidShow from './cupid-show.png';
+import succubusShow from './succubus-show.png';
+import guardShow from './guard-show.png';
+import wolfWhiteShow from './wolf-show.png';
+import idiotShow from './idiot-show.png';
+import witchShow from './witch-show.png';
+import wolfbeautyShow from './wolfbeauty-show.png';
+// import hunterShow from './hunter-show.png';
+import prophetShow from './prophet-show.png';
+import wolfKingShow from './wolfking-show.png';
+import knightShow from './knight-show.png';
 
 export {
   villager,
@@ -80,4 +92,16 @@ export {
   prophetSquare,
   wolfKingSquare,
   knightSquare,
+  villagerShow,
+  wolfbeautyShow,
+  cupidShow,
+  succubusShow,
+  guardShow,
+  wolfWhiteShow,
+  idiotShow,
+  witchShow,
+  // hunterShow,
+  prophetShow,
+  wolfKingShow,
+  knightShow,
 };

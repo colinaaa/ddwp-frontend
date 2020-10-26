@@ -1,5 +1,9 @@
 import Taro, { FC, useRouter } from '@tarojs/taro';
-import { View } from '@tarojs/components';
+import { View, Image, Text } from '@tarojs/components';
+
+import { getImageShow } from './lineup';
+
+import './show.less';
 
 const Show: FC = () => {
   const {
@@ -7,9 +11,9 @@ const Show: FC = () => {
   } = useRouter();
 
   return (
-    <View>
-      {pos}
-      {charater}
+    <View className='show'>
+      <Image src={getImageShow(charater)} className='show-img' />
+      <Text className='show-position'>{pos}</Text>
     </View>
   );
 };
