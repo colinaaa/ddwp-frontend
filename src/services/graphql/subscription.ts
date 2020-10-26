@@ -7,6 +7,7 @@ const SUB_ROOM_UPDATED = gql`
       playersNumber
       players {
         position
+        role
       }
       gameConfig {
         totalNumber

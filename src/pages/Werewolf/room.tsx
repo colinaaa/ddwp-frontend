@@ -1,8 +1,15 @@
 import Taro, { FC, useCallback, useMemo, useRouter, useState } from '@tarojs/taro';
 import { View, Text, Image, Button } from '@tarojs/components';
 
-import { getRoom, getRoomVariables, OnRoomUpdated, OnRoomUpdatedVariables } from '@services/graphql';
-import { useLazyQuery, useSubscription } from '@hooks/useQuery';
+import {
+  getRoom,
+  getRoomVariables,
+  OnRoomUpdated,
+  OnRoomUpdatedVariables,
+  shuffle,
+  shuffleVariables,
+} from '@services/graphql';
+import { useLazyQuery, useMutation, useSubscription } from '@hooks/useQuery';
 import Card from '@components/Card';
 import { god, question, back, lock } from '@static/werewolf';
 
@@ -15,11 +22,6 @@ interface Props {
 const MaxPlayersNumber = 16;
 
 const Room: FC<Props> = () => {
-  const [begin, setBegin] = useState(false);
-  const handleConfirm = useCallback(() => {
-    setBegin(true);
-  }, []);
-
   const router = useRouter();
   const roomNumber = +router.params['roomNumber'];
 
@@ -35,6 +37,12 @@ const Room: FC<Props> = () => {
     },
   });
 
+  const [deal] = useMutation<shuffle, shuffleVariables>('SHUFFLE', {
+    onCompleted: ({ deal }) => setRoom(({ roomUpdated }) => ({ roomUpdated: { ...roomUpdated, ...deal } })),
+  });
+
+  const handleDeal = useCallback(() => deal({ variables: { roomNumber } }), [roomNumber]);
+
   useSubscription<OnRoomUpdated, OnRoomUpdatedVariables>(
     'SUB_ROOM_UPDATED',
     {
@@ -47,7 +55,8 @@ const Room: FC<Props> = () => {
   );
 
   const [queryRoom, { called }] = useLazyQuery<getRoom, getRoomVariables>('GET_ROOM', undefined, {
-    onCompleted: ({ roomByNumber }) => setRoom({ roomUpdated: { ...roomByNumber } }),
+    onCompleted: ({ roomByNumber }) =>
+      setRoom(({ roomUpdated }) => ({ roomUpdated: { ...roomUpdated, ...roomByNumber } })),
   });
 
   if (roomNumber && !called) {
@@ -71,7 +80,9 @@ const Room: FC<Props> = () => {
           <View className='room-action-id-card'>上帝</View>
         </View>
       </View>
-      <Button className='room-action-btn'>开始发牌</Button>
+      <Button disabled={!canStart} onClick={handleDeal} className='room-action-btn'>
+        开始发牌
+      </Button>
     </View>
   );
 
@@ -85,7 +96,7 @@ const Room: FC<Props> = () => {
           <View className='room-number-span'>{roomNumber}</View>号房间
         </View>
       </Card>
-      {begin && action}
+      {action}
       <View className='room-charaters'>
         {Array(MaxPlayersNumber).map((i, index) =>
           index < playersNumber ? (
@@ -98,13 +109,6 @@ const Room: FC<Props> = () => {
               <Image className='room-charaters-card-lock' src={lock} />
             </View>
           ),
-        )}
-      </View>
-      <View>
-        {!begin && (
-          <Button onClick={handleConfirm} className='room-confirm'>
-            确定
-          </Button>
         )}
       </View>
     </View>

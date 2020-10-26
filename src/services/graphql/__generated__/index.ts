@@ -4,6 +4,46 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: shuffle
+// ====================================================
+
+export interface shuffle_deal_players {
+  __typename: "Player";
+  /**
+   * 位置
+   */
+  position: number;
+  /**
+   * 角色
+   */
+  role: string | null;
+}
+
+export interface shuffle_deal {
+  __typename: "WerewolfRoom";
+  /**
+   * 玩家信息
+   */
+  players: shuffle_deal_players[] | null;
+}
+
+export interface shuffle {
+  /**
+   * 开始发牌
+   */
+  deal: shuffle_deal;
+}
+
+export interface shuffleVariables {
+  roomNumber: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: createRoom
 // ====================================================
 
@@ -154,6 +194,10 @@ export interface OnRoomUpdated_roomUpdated_players {
    * 位置
    */
   position: number;
+  /**
+   * 角色
+   */
+  role: string | null;
 }
 
 export interface OnRoomUpdated_roomUpdated_gameConfig_lineup {
