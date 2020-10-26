@@ -10,8 +10,8 @@ import {
   shuffleVariables,
 } from '@services/graphql';
 import { useLazyQuery, useMutation, useSubscription } from '@hooks/useQuery';
-import Card from '@components/Card';
 import { god, question, back, lock } from '@static/werewolf';
+import GameHeader from '@components/GameHeader';
 
 import './room.less';
 
@@ -91,25 +91,21 @@ const Room: FC<Props> = () => {
 
   return (
     <View className='room'>
-      <Card>
-        <View className='room-number'>
-          <View className='room-number-span'>{roomNumber}</View>号房间
-        </View>
-      </Card>
+      <GameHeader roomNumber={roomNumber} />
       {action}
       <View className='room-charaters'>
-        {Array(MaxPlayersNumber).map((i, index) =>
-          index < playersNumber ? (
-            <View key={i} className='room-charaters-card'>
-              {index >= lastPlayer ? questionImage : backImage}
-              {index >= lastPlayer && <View className='room-charaters-card-cnt'>{index + 1}</View>}
-            </View>
-          ) : (
-            <View key={i} className='room-charaters-card'>
+        {[...Array(MaxPlayersNumber).keys()].map((index) => (
+          <View key={`no-${index}`} className='room-charaters-card'>
+            {index < playersNumber ? (
+              <View>
+                {index >= lastPlayer ? questionImage : backImage}
+                {index >= lastPlayer && <View className='room-charaters-card-cnt'>{index + 1}</View>}
+              </View>
+            ) : (
               <Image className='room-charaters-card-lock' src={lock} />
-            </View>
-          ),
-        )}
+            )}
+          </View>
+        ))}
       </View>
     </View>
   );

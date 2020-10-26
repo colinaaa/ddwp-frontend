@@ -34,6 +34,7 @@ class App extends Component {
       'pages/Werewolf/index',
       'pages/Werewolf/create',
       'pages/Werewolf/room',
+      'pages/Werewolf/select',
     ],
     window: {
       backgroundTextStyle: 'light',

@@ -26,7 +26,7 @@ const Game: FC<Props> = ({ name }) => {
   }, []);
 
   const handleConfirm = useCallback(() => {
-    console.log(roomNumber);
+    navigateTo({ url: `select?roomNumber=${roomNumber}` });
   }, [roomNumber]);
 
   const handleChange = useCallback((e) => {
