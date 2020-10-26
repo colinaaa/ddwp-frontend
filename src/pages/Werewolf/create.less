@@ -10,8 +10,8 @@
 @button-height: 20vh;
 @button-margin: (25vw - @button-width) / 5;
 
-@badge-height: 155px;
-@badge-width: 138px;
+@badge-height: 155px * 1.2;
+@badge-width: 155px * 1.2;
 
 .werewolf {
   &-root {
@@ -86,12 +86,12 @@
       height: @badge-height / 2;
 
       &-badge {
-        .radius.round();
-        .shadow.card-3();
         position: relative;
         bottom: @badge-height / 4;
         height: @badge-height;
         width: @badge-width;
+        // background: #ffffff;
+        border-radius: 25px;
       }
     }
 

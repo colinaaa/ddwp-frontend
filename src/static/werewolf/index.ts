@@ -1,6 +1,5 @@
 import villager from './villager.png';
 import villagerFont from './villager-withfont.png';
-import unknown2 from './unknown2.png';
 import cupid from './cupid.png';
 import cupidFont from './cupid-withfont.png';
 import succubus from './succubus.png';
@@ -26,15 +25,25 @@ import question from './question.jpg';
 import back from './back.png';
 import lock from './lock.png';
 import god from './god.png';
-
 import cover from './cover.png';
+import villagerSquare from './villager-square.png';
+import cupidSquare from './cupid-square.png';
+import succubusSquare from './succubus-square.png';
+import guardSquare from './guard-square.png';
+import wolfWhiteSquare from './wolf-square.png';
+import idiotSquare from './idiot-square.png';
+import witchSquare from './witch-square.png';
+import wolfbeautySquare from './wolfbeauty-square.png';
+import hunterSquare from './hunter-square.png';
+import prophetSquare from './prophet-square.png';
+import wolfKingSquare from './wolfking-square.png';
+import knightSquare from './knight-square.png';
 
 export {
   villager,
   villagerFont,
   wolfbeauty,
   wolfbeautyFont,
-  unknown2,
   cupid,
   cupidFont,
   succubus,
@@ -59,4 +68,16 @@ export {
   back,
   lock,
   god,
+  villagerSquare,
+  wolfbeautySquare,
+  cupidSquare,
+  succubusSquare,
+  guardSquare,
+  wolfWhiteSquare,
+  idiotSquare,
+  witchSquare,
+  hunterSquare,
+  prophetSquare,
+  wolfKingSquare,
+  knightSquare,
 };

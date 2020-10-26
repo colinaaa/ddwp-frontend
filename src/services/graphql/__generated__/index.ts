@@ -156,6 +156,30 @@ export interface OnRoomUpdated_roomUpdated_players {
   position: number;
 }
 
+export interface OnRoomUpdated_roomUpdated_gameConfig_lineup {
+  __typename: "Role";
+  /**
+   * 角色名称
+   */
+  name: string;
+  /**
+   * 角色数量
+   */
+  count: number;
+}
+
+export interface OnRoomUpdated_roomUpdated_gameConfig {
+  __typename: "WerewolfConfig";
+  /**
+   * 总人数
+   */
+  totalNumber: number;
+  /**
+   * 阵容
+   */
+  lineup: OnRoomUpdated_roomUpdated_gameConfig_lineup[] | null;
+}
+
 export interface OnRoomUpdated_roomUpdated {
   __typename: "WerewolfRoom";
   /**
@@ -170,6 +194,18 @@ export interface OnRoomUpdated_roomUpdated {
    * 玩家信息
    */
   players: OnRoomUpdated_roomUpdated_players[] | null;
+  /**
+   * 狼人杀游戏配置
+   */
+  gameConfig: OnRoomUpdated_roomUpdated_gameConfig;
+  /**
+   * 是否开始
+   */
+  isBegin: boolean | null;
+  /**
+   * 是否结束
+   */
+  isEnd: boolean | null;
 }
 
 export interface OnRoomUpdated {

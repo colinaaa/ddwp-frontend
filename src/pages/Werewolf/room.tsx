@@ -24,7 +24,15 @@ const Room: FC<Props> = () => {
   const roomNumber = +router.params['roomNumber'];
 
   const [room, setRoom] = useState<OnRoomUpdated>({
-    roomUpdated: { players: [], playersNumber: MaxPlayersNumber + 1, __typename: 'WerewolfRoom', roomNumber: 0 },
+    roomUpdated: {
+      players: [],
+      playersNumber: MaxPlayersNumber + 1,
+      __typename: 'WerewolfRoom',
+      roomNumber: 0,
+      isBegin: false,
+      isEnd: false,
+      gameConfig: { lineup: [], __typename: 'WerewolfConfig', totalNumber: 0 },
+    },
   });
 
   useSubscription<OnRoomUpdated, OnRoomUpdatedVariables>(
@@ -39,11 +47,10 @@ const Room: FC<Props> = () => {
   );
 
   const [queryRoom, { called }] = useLazyQuery<getRoom, getRoomVariables>('GET_ROOM', undefined, {
-    onCompleted: (data) => setRoom({ roomUpdated: { ...data.roomByNumber } }),
+    onCompleted: ({ roomByNumber }) => setRoom({ roomUpdated: { ...roomByNumber } }),
   });
 
   if (roomNumber && !called) {
-    console.log(roomNumber, room.roomUpdated.roomNumber);
     queryRoom({ variables: { roomNumber } });
   }
 

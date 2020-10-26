@@ -8,6 +8,15 @@ const SUB_ROOM_UPDATED = gql`
       players {
         position
       }
+      gameConfig {
+        totalNumber
+        lineup {
+          name
+          count
+        }
+      }
+      isBegin
+      isEnd
     }
   }
 `;

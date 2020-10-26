@@ -26,6 +26,18 @@ import {
   wolfbeautyFont,
   wolfKingFont,
   knightFont,
+  villagerSquare,
+  wolfbeautySquare,
+  cupidSquare,
+  succubusSquare,
+  guardSquare,
+  wolfWhiteSquare,
+  idiotSquare,
+  witchSquare,
+  hunterSquare,
+  prophetSquare,
+  wolfKingSquare,
+  knightSquare,
 } from '@static/werewolf';
 
 const charaterNames = [
@@ -56,6 +68,21 @@ const img = {
   狼美人: wolfbeauty,
 };
 
+const imgSquare = {
+  狼人: wolfWhiteSquare,
+  村民: villagerSquare,
+  丘比特: cupidSquare,
+  守卫: guardSquare,
+  魅魔: succubusSquare,
+  猎人: hunterSquare,
+  预言家: prophetSquare,
+  女巫: witchSquare,
+  白痴: idiotSquare,
+  狼美人: wolfbeautySquare,
+  白狼王: wolfKingSquare,
+  骑士: knightSquare,
+};
+
 const imgFont = {
   狼人: wolfWhiteFont,
   村民: villagerFont,
@@ -71,12 +98,10 @@ const imgFont = {
   骑士: knightFont,
 };
 
-const getImage = (name: string) => {
-  return img[name];
-};
+const getImage = (name: string) => img[name];
 
-const getImageFont = (name: string) => {
-  return imgFont[name];
-};
+const getImageFont = (name: string) => imgFont[name];
 
-export { charaterNames, getImage, getImageFont };
+const getImageSquare = (name: string) => imgSquare[name];
+
+export { charaterNames, getImage, getImageFont, getImageSquare };

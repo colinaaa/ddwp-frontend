@@ -6,7 +6,7 @@ import Card from '@components/Card';
 import { useMutation } from '@hooks/useQuery';
 import { createRoom as createRoomT, createRoomVariables, GameType } from '@services/graphql';
 
-import { charaterNames, getImage, getImageFont } from './lineup';
+import { charaterNames, getImageFont, getImageSquare } from './lineup';
 
 import './create.less';
 
@@ -88,7 +88,7 @@ const Create: FC = () => {
         onlyConfirm
         renderBadge={
           <View className='werewolf-modal-header'>
-            <Image className='werewolf-modal-header-badge' src={getImage(current.name)} />
+            <Image className='werewolf-modal-header-badge' src={getImageSquare(current.name)} />
           </View>
         }
       >
