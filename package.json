@@ -1,6 +1,6 @@
 {
   "name": "ddwp-frontend",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": true,
   "description": "A mini-program for baidu competition",
   "templateInfo": {
