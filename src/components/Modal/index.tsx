@@ -1,4 +1,4 @@
-import Taro, { FC, useCallback, useMemo } from '@tarojs/taro';
+import Taro, { FC, useCallback } from '@tarojs/taro';
 import { View, Text, Button } from '@tarojs/components';
 import classNames from 'classnames';
 
@@ -14,6 +14,7 @@ interface Props {
   title?: string;
   renderBadge?: unknown;
   onlyConfirm?: boolean;
+  noTitle?: boolean;
 }
 
 const Modal: FC<Props> = ({
@@ -25,6 +26,7 @@ const Modal: FC<Props> = ({
   children,
   renderBadge,
   onlyConfirm = false,
+  noTitle = false,
 }) => {
   const handleClickOverlay = () => {
     onClose();
@@ -71,9 +73,11 @@ const Modal: FC<Props> = ({
         className='modal-container'
       >
         {renderBadge && <View className='modal-badge'> {renderBadge} </View>}
-        <View className='modal-header'>
-          <Text className='modal-header-title'>{title}</Text>
-        </View>
+        {!noTitle && (
+          <View className='modal-header'>
+            <Text className='modal-header-title'>{title}</Text>
+          </View>
+        )}
         <View className='modal-content'>{children}</View>
         {footer}
       </View>

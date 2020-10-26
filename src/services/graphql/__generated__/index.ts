@@ -4,6 +4,51 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: selectPosition
+// ====================================================
+
+export interface selectPosition_selectPosition_players {
+  __typename: "Player";
+  /**
+   * 角色
+   */
+  role: string | null;
+  /**
+   * 位置
+   */
+  position: number;
+}
+
+export interface selectPosition_selectPosition {
+  __typename: "WerewolfRoom";
+  /**
+   * 房间号
+   */
+  roomNumber: number;
+  /**
+   * 玩家信息
+   */
+  players: selectPosition_selectPosition_players[] | null;
+}
+
+export interface selectPosition {
+  /**
+   * 选择位置
+   */
+  selectPosition: selectPosition_selectPosition;
+}
+
+export interface selectPositionVariables {
+  pos: number;
+  roomNumber: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: shuffle
 // ====================================================
 

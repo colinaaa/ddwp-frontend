@@ -1,13 +1,15 @@
-import Taro, { FC, useMemo, useRouter, useState } from '@tarojs/taro';
+import Taro, { FC, navigateTo, useCallback, useMemo, useRouter, useState } from '@tarojs/taro';
 import { View, Image, Button } from '@tarojs/components';
 import classNames from 'classnames';
 
 import GameHeader from '@components/GameHeader';
-import { useLazyQuery } from '@hooks/useQuery';
-import { GameType, getRoom, getRoomVariables } from '@services/graphql';
+import { useLazyQuery, useMutation } from '@hooks/useQuery';
+import { GameType, getRoom, getRoomVariables, selectPosition, selectPositionVariables } from '@services/graphql';
 import { lock } from '@static/werewolf';
 
 import './select.less';
+import Modal from '@components/Modal';
+import { getImage } from './lineup';
 
 const MaxPlayersNumber = 16;
 
@@ -16,6 +18,7 @@ const Select: FC = () => {
   const roomNumber = +params['roomNumber'];
 
   const [selected, setSelected] = useState(-1);
+  const [submitted, setSubmitted] = useState(false);
 
   const [room, setRoom] = useState<getRoom>({
     roomByNumber: {
@@ -30,6 +33,11 @@ const Select: FC = () => {
     },
   });
 
+  const [select] = useMutation<selectPosition, selectPositionVariables>('SELECT_POSITION', {
+    onCompleted: ({ selectPosition }) =>
+      setRoom(({ roomByNumber }) => ({ roomByNumber: { ...roomByNumber, ...selectPosition } })),
+  });
+
   const [queryRoom, { called }] = useLazyQuery<getRoom, getRoomVariables>('GET_ROOM', undefined, {
     onCompleted: ({ roomByNumber }) => setRoom((pre) => ({ roomByNumber: { ...pre.roomByNumber, ...roomByNumber } })),
   });
@@ -42,6 +50,15 @@ const Select: FC = () => {
     setSelected(index);
   };
 
+  const handleConfirm = async () => {
+    const { errors } = await select({ variables: { roomNumber, pos: selected } });
+    if (errors) {
+      console.error(errors);
+      return false;
+    }
+    setSubmitted(true);
+  };
+
   if (roomNumber && !called) {
     queryRoom({ variables: { roomNumber } });
   }
@@ -49,13 +66,49 @@ const Select: FC = () => {
   const { players, playersNumber } = room.roomByNumber;
 
   const selectedPositions = useMemo(
-    () => new Set((players ? players.filter(({ position }) => position) : []).map(({ position }) => position)),
+    () =>
+      new Map(
+        (players ? players.filter(({ position }) => position !== -1) : []).map(({ position, role }) => [
+          position,
+          role,
+        ]),
+      ),
     [players],
   );
+
+  const charater = useMemo(() => submitted && selectedPositions.get(selected), [
+    submitted,
+    selected,
+    selectedPositions,
+  ]);
+
+  const handleClose = useCallback(() => {
+    navigateTo({ url: `show?charater=${charater}&pos=${selected}` });
+  }, [charater, selected]);
 
   return (
     <View className='select'>
       <GameHeader roomNumber={roomNumber} />
+      {charater && (
+        <Modal
+          open={!!charater}
+          renderBadge={
+            <View>
+              <Button disabled className='select-modal-title'>
+                {charater}
+              </Button>
+            </View>
+          }
+          onlyConfirm
+          noTitle
+          title={charater}
+          onClose={handleClose}
+        >
+          <View className='select-modal-container'>
+            <Image className='select-modal-img' src={getImage(charater)} />
+          </View>
+        </Modal>
+      )}
       <View key={roomNumber} className='select-charaters'>
         {[...Array(MaxPlayersNumber).keys()].map((index) => (
           <View
@@ -72,7 +125,7 @@ const Select: FC = () => {
           </View>
         ))}
       </View>
-      <Button disabled={selected === -1} className='select-confirm'>
+      <Button onClick={handleConfirm} disabled={selected === -1} className='select-confirm'>
         确定
       </Button>
     </View>
