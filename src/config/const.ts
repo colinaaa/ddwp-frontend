@@ -12,6 +12,6 @@ const getRoute = (game: string): string => {
   return nameToRoute[game];
 };
 
-const GraphQLEndpoint = 'http://localhost:4000/graphql';
+const GraphQLEndpoint = 'https://ddwp.outsiders.top/graphql';
 
 export { cardNames, nameToRoute, getRoute, GraphQLEndpoint };
