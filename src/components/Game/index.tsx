@@ -1,4 +1,6 @@
 import Modal from '@components/Modal';
+import { useMutation } from '@hooks/useQuery';
+import { joinRoom, joinRoomVariables } from '@services/graphql';
 import { View, Button, Input } from '@tarojs/components';
 import Taro, { FC, setNavigationBarTitle, showModal, navigateTo, useState, useCallback, useEffect } from '@tarojs/taro';
 
@@ -14,6 +16,8 @@ const Game: FC<Props> = ({ name }) => {
     setNavigationBarTitle({ title: name });
   }, []);
 
+  const [join] = useMutation<joinRoom, joinRoomVariables>('JOIN_ROOM');
+
   const [open, setOpen] = useState(false);
   const [roomNumber, setRoomNumber] = useState('');
 
@@ -25,7 +29,9 @@ const Game: FC<Props> = ({ name }) => {
     setOpen((open) => !open);
   }, []);
 
-  const handleConfirm = useCallback(() => {
+  const handleConfirm = useCallback(async () => {
+    await join({ variables: { roomNumber: +roomNumber } });
+    // TODO: deal with join error here
     navigateTo({ url: `select?roomNumber=${roomNumber}` });
   }, [roomNumber]);
 

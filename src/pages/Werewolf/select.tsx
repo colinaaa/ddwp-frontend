@@ -3,8 +3,16 @@ import { View, Image, Button } from '@tarojs/components';
 import classNames from 'classnames';
 
 import GameHeader from '@components/GameHeader';
-import { useLazyQuery, useMutation } from '@hooks/useQuery';
-import { GameType, getRoom, getRoomVariables, selectPosition, selectPositionVariables } from '@services/graphql';
+import { useLazyQuery, useMutation, useSubscription } from '@hooks/useQuery';
+import {
+  GameType,
+  getRoom,
+  getRoomVariables,
+  OnRoomUpdated,
+  OnRoomUpdatedVariables,
+  selectPosition,
+  selectPositionVariables,
+} from '@services/graphql';
 import { lock } from '@static/werewolf';
 
 import './select.less';
@@ -33,6 +41,17 @@ const Select: FC = () => {
     },
   });
 
+  useSubscription<OnRoomUpdated, OnRoomUpdatedVariables>(
+    'SUB_ROOM_UPDATED',
+    { roomNumber },
+    {
+      onSubscriptionData: ({ subscriptionData: { data } }) =>
+        data &&
+        data.roomUpdated &&
+        setRoom(({ roomByNumber }) => ({ roomByNumber: { ...roomByNumber, ...data.roomUpdated } })),
+    },
+  );
+
   const [select] = useMutation<selectPosition, selectPositionVariables>('SELECT_POSITION', {
     onCompleted: ({ selectPosition }) =>
       setRoom(({ roomByNumber }) => ({ roomByNumber: { ...roomByNumber, ...selectPosition } })),
@@ -43,6 +62,9 @@ const Select: FC = () => {
   });
 
   const handleSelect = (index: number) => () => {
+    if (submitted) {
+      return false;
+    }
     if (index === selected) {
       setSelected(-1);
       return false;
@@ -125,8 +147,8 @@ const Select: FC = () => {
           </View>
         ))}
       </View>
-      <Button onClick={handleConfirm} disabled={selected === -1} className='select-confirm'>
-        确定
+      <Button onClick={handleConfirm} disabled={selected === -1 || submitted} className='select-confirm'>
+        {submitted ? '等待其他玩家' : '确定'}
       </Button>
     </View>
   );

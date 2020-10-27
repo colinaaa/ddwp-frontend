@@ -89,6 +89,50 @@ export interface shuffleVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: joinRoom
+// ====================================================
+
+export interface joinRoom_joinRoom_players {
+  __typename: "Player";
+  /**
+   * 位置
+   */
+  position: number;
+}
+
+export interface joinRoom_joinRoom {
+  __typename: "WerewolfRoom";
+  /**
+   * 房间号
+   */
+  roomNumber: number;
+  /**
+   * 玩家信息
+   */
+  players: joinRoom_joinRoom_players[] | null;
+  /**
+   * 玩家人数
+   */
+  playersNumber: number;
+}
+
+export interface joinRoom {
+  /**
+   * 加入房间
+   */
+  joinRoom: joinRoom_joinRoom;
+}
+
+export interface joinRoomVariables {
+  roomNumber: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: createRoom
 // ====================================================
 
