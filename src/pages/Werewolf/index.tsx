@@ -3,7 +3,7 @@ import Taro, { Component, Config } from '@tarojs/taro';
 import { View, Image } from '@tarojs/components';
 
 import { Game } from '@components/Game';
-import { wolfWhite } from '@static/werewolf';
+import { cover } from '@static/werewolf';
 
 import './index.less';
 
@@ -28,7 +28,7 @@ export default class Werewolf extends Component {
     return (
       <View className='werewolf-root'>
         <View className='werewolf-image-container'>
-          <Image className='werewolf-img' src={wolfWhite} />
+          <Image className='werewolf-img' src={cover} />
         </View>
         <View className='werewolf-action'>
           <Game name='狼人杀' />

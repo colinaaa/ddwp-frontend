@@ -33,12 +33,15 @@ class App extends Component {
       'pages/help/index',
       'pages/Werewolf/index',
       'pages/Werewolf/create',
+      'pages/Werewolf/room',
+      'pages/Werewolf/select',
+      'pages/Werewolf/show',
     ],
     window: {
       backgroundTextStyle: 'light',
       backgroundColor: '#f5f5f5',
       navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'WeChat',
+      navigationBarTitleText: '联小创桌游助手',
       navigationBarTextStyle: 'black',
     },
   };

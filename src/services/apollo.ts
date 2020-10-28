@@ -3,18 +3,21 @@ import { getMainDefinition } from 'taro-apollo-client/utilities';
 import { WebSocketLink } from 'taro-apollo-client/link/ws';
 import Taro from '@tarojs/taro';
 
-import { GraphQLEndpoint } from '@config/const';
+import { GraphQLEndpoint, WsEndpoint } from '@config/const';
 
+import WebSocket from './websocket';
+
+type MethodT = 'OPTIONS' | 'GET' | 'HEAD' | 'POST' | 'PUT' | 'DELETE' | 'TRACE' | 'CONNECT' | undefined;
 type fetchT = typeof window.fetch;
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 const fetch: fetchT = async (url: string, options?) => {
   const { statusCode, errMsg, header, data } = await Taro.request({
     url,
     header: options && options.headers,
     data: options && options.body,
-    // @ts-ignore
-    method: options && options.method,
+    method: options && (options.method as MethodT),
     dataType: 'text',
   });
 
@@ -32,10 +35,11 @@ const fetch: fetchT = async (url: string, options?) => {
 };
 
 const wsLink = new WebSocketLink({
-  uri: 'ws://localhost:4000/graphql',
+  uri: WsEndpoint,
   options: {
     reconnect: true,
   },
+  webSocketImpl: WebSocket,
 });
 
 const httpLink = new HttpLink({ fetch, uri: GraphQLEndpoint });

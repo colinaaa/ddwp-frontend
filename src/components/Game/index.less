@@ -1,6 +1,9 @@
 @import '../../styles/index.less';
 @import '../../styles/mixins/radius.less';
 
+@button-height: 113px;
+@button-width: 664px;
+
 .game {
   &-root {
     display: flex;
@@ -10,9 +13,12 @@
 
   &-btn {
     flex: 1 0 auto;
-    width: 80vw;
-    background-color: #f1f1f1;
-    margin: 2vh 0 2vh 0;
+    width: @button-width;
+    height: @button-height;
+    line-height: @button-height;
+    background: #f3f3f3;
+    border-radius: 25px;
+    margin-bottom: 56px;
 
     &:after {
       border: none;

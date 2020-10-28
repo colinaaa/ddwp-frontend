@@ -1,12 +1,12 @@
 @import '../../styles/index.less';
 
-@image-width: 238px;
-@image-height: 328px;
-@image-scale: 1.5;
+@image-width: 324px;
+@image-height: 486px;
 
 .werewolf {
   &-root {
     .flex-center();
+    justify-content: space-evenly;
     height: 100vh;
     width: 100vw;
 
@@ -14,7 +14,7 @@
   }
 
   &-img {
-    width: @image-width * @image-scale;
-    height: @image-height * @image-scale;
+    width: @image-width;
+    height: @image-height;
   }
 }

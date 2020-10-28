@@ -1,6 +1,7 @@
 @import '../../styles/mixins/button.less';
 @import '../../styles/mixins/shadow.less';
 @import '../../styles/mixins/radius.less';
+@import '../../styles/mixins/header-card.less';
 @import '../../styles/index.less';
 
 @margin: 6vw;
@@ -9,7 +10,8 @@
 @button-height: 20vh;
 @button-margin: (25vw - @button-width) / 5;
 
-@badge-height: 10vh;
+@badge-height: 155px * 1.2;
+@badge-width: 155px * 1.2;
 
 .werewolf {
   &-root {
@@ -31,9 +33,12 @@
 
   &-total {
     .flex-center();
-    min-height: 12vh;
-    font-size: large;
-    width: 100vw - (@margin + @button-margin) * 2;
+    .header-card();
+
+    &-cnt {
+      margin-left: 30px;
+      font-size: 35px;
+    }
   }
 
   &-charaters {
@@ -41,19 +46,19 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
-    margin: 0 @margin 0 @margin;
+    padding: 0 26px 0 26px;
 
     &-button {
       .radius.normal();
       // .shadow.card-1();
       display: block;
       flex: 1 1 auto;
-      max-width: @button-width;
-      min-width: @button-width;
-      max-height: @button-height;
-      min-height: @button-height;
-      margin: @button-margin;
       padding: 0;
+      width: 155px;
+      height: 211px;
+      background: #ffffff;
+      border-radius: 25px;
+      margin: 0 7px 0 7px;
 
       &:after {
         border: none;
@@ -61,66 +66,84 @@
     }
 
     &-img {
-      .radius.normal();
       display: block;
-      width: @button-width;
-      height: @button-height;
+      width: 155px;
+      height: 211px;
+      background: #ffffff;
+      border-radius: 25px;
       overflow: hidden;
     }
-  }
 
-  &-modal-header {
-    .flex-center();
-    height: @badge-height / 2;
-
-    &-badge {
-      .radius.round();
-      .shadow.card-3();
-      position: relative;
-      bottom: @badge-height / 4;
-      height: @badge-height;
-      width: @badge-height;
-    }
-  }
-
-  &-modal-content {
-    display: flex;
-    flex-direction: row;
-    margin: 10px;
-
-    & > text {
+    &-cnt {
       .flex-center();
-
-      flex: 1 0 auto;
-      background-color: whitesmoke;
-    }
-
-    & > button {
-      flex: 0 1 auto;
-      margin: 0 20px 0 20px;
-    }
-
-    &-dec {
-      .button-normal();
-    }
-
-    &-inc {
-      .button-confirm();
+      margin: 9px 0 9px 0;
     }
   }
 
-  &-padding {
-    flex: 1 1 auto;
+  &-modal {
+    &-header {
+      .flex-center();
+      height: 0;
+
+      &-badge {
+        // I dont know why here is -15%, it looks great
+        transform: translateY(-15%);
+        height: @badge-height;
+        width: @badge-width;
+        // background: #ffffff;
+        border-radius: 25px;
+      }
+    }
+
+    &-content {
+      display: flex;
+      flex-direction: row;
+      margin: 0 44px 0 44px;
+
+      & > text {
+        .flex-center();
+
+        flex: 1 0 auto;
+        width: 344px;
+        height: 78px;
+        background: #f6f6f6;
+        border-radius: 25px;
+        border: 1px solid #f6f6f6;
+        font-size: 36px;
+        margin: 0 30px 0 30px;
+      }
+
+      & > button {
+        .flex-center();
+        flex: 0 1 auto;
+        height: 78px;
+        width: 78px;
+        line-height: 78px;
+      }
+
+      &-dec {
+        .button-normal();
+      }
+
+      &-inc {
+        .button-confirm();
+      }
+    }
+
+    &-padding {
+      flex: 1 1 auto;
+    }
   }
 
   &-footer {
-    width: 75vw;
     & > button {
       .button-confirm();
       .flex-center();
-      min-height: 10vh;
-      width: 100%;
-      font-size: large;
+      font-size: 36px;
+      width: 664px;
+      height: 113px;
+      background: #000000;
+      border-radius: 25px;
     }
   }
 }
