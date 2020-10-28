@@ -7,7 +7,7 @@ import './show.less';
 
 const Show: FC = () => {
   const {
-    params: { pos, charater },
+    params: { pos, charater = 'none' },
   } = useRouter();
 
   return (

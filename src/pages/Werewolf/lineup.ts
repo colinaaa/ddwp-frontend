@@ -46,10 +46,11 @@ import {
   wolfWhiteShow,
   idiotShow,
   witchShow,
-  // hunterShow,
+  hunterShow,
   prophetShow,
   wolfKingShow,
   knightShow,
+  backShow,
 } from '@static/werewolf';
 
 const charaterNames = [
@@ -116,13 +117,14 @@ const imgShow = {
   丘比特: cupidShow,
   守卫: guardShow,
   魅魔: succubusShow,
-  // 猎人: hunterShow,
+  猎人: hunterShow,
   预言家: prophetShow,
   女巫: witchShow,
   白痴: idiotShow,
   狼美人: wolfbeautyShow,
   白狼王: wolfKingShow,
   骑士: knightShow,
+  none: backShow,
 };
 
 const getImage = (name: string) => img[name];

@@ -25,6 +25,7 @@ const wolfKingFont = `${prefix}/werewolf/wolfking-withfont.png`;
 const knightFont = `${prefix}/werewolf/knight-withfont.png`;
 const question = `${prefix}/werewolf/question.jpg`;
 const back = `${prefix}/werewolf/back.png`;
+const backShow = `${prefix}/werewolf/back-show.png`;
 const lock = `${prefix}/werewolf/lock.png`;
 const god = `${prefix}/werewolf/god.png`;
 const cover = `${prefix}/werewolf/cover.png`;
@@ -80,6 +81,7 @@ export {
   cover,
   question,
   back,
+  backShow,
   lock,
   god,
   villagerSquare,
