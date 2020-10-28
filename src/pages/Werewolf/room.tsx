@@ -1,5 +1,6 @@
-import Taro, { FC, useCallback, useMemo, useRouter, useState } from '@tarojs/taro';
+import Taro, { FC, navigateTo, useCallback, useMemo, useRouter, useState } from '@tarojs/taro';
 import { View, Text, Image, Button } from '@tarojs/components';
+import classNames from 'classnames';
 
 import {
   getRoom,
@@ -8,12 +9,16 @@ import {
   OnRoomUpdatedVariables,
   shuffle,
   shuffleVariables,
+  endGame,
+  endGameVariables,
 } from '@services/graphql';
 import { useLazyQuery, useMutation, useSubscription } from '@hooks/useQuery';
 import { god, question, back, lock } from '@static/werewolf';
 import GameHeader from '@components/GameHeader';
 
 import './room.less';
+import { getImageFont } from './lineup';
+import useSelectedPositions from '@hooks/useSelectedPositions';
 
 interface Props {
   roomNumber?: number;
@@ -24,6 +29,9 @@ const MaxPlayersNumber = 16;
 const Room: FC<Props> = () => {
   const router = useRouter();
   const roomNumber = +router.params['roomNumber'];
+
+  const [submitted, setSubmitted] = useState(false);
+  const [deadArray, setDeadArray] = useState<Array<boolean>>(() => Array(MaxPlayersNumber).fill(false));
 
   const [room, setRoom] = useState<OnRoomUpdated>({
     roomUpdated: {
@@ -41,7 +49,18 @@ const Room: FC<Props> = () => {
     onCompleted: ({ deal }) => setRoom(({ roomUpdated }) => ({ roomUpdated: { ...roomUpdated, ...deal } })),
   });
 
-  const handleDeal = useCallback(() => deal({ variables: { roomNumber } }), [roomNumber]);
+  const [end] = useMutation<endGame, endGameVariables>('END_GAME', {
+    onCompleted: () => navigateTo({ url: 'index' }),
+  });
+
+  const handleSubmit = useCallback(() => {
+    if (submitted) {
+      end({ variables: { roomNumber } });
+      return false;
+    }
+    setSubmitted(true);
+    deal({ variables: { roomNumber } });
+  }, [roomNumber, submitted]);
 
   useSubscription<OnRoomUpdated, OnRoomUpdatedVariables>(
     'SUB_ROOM_UPDATED',
@@ -65,6 +84,14 @@ const Room: FC<Props> = () => {
 
   const { playersNumber, players } = room.roomUpdated;
 
+  const handleClick = (index: number) => () => {
+    setDeadArray((pre) => {
+      const newArray = [...pre];
+      newArray[index] = !pre[index];
+      return newArray;
+    });
+  };
+
   const canStart = useMemo(() => !!players && playersNumber === players.length, [players, playersNumber]);
 
   const lastPlayer = useMemo(() => (players ? players.length : 0), [players]);
@@ -80,32 +107,53 @@ const Room: FC<Props> = () => {
           <View className='room-action-id-card'>上帝</View>
         </View>
       </View>
-      <Button disabled={!canStart} onClick={handleDeal} className='room-action-btn'>
-        开始发牌
+      <Button disabled={!canStart} onClick={handleSubmit} className='room-action-btn'>
+        {submitted ? '结束游戏' : '开始发牌'}
       </Button>
     </View>
   );
 
   const backImage = <Image className='room-charaters-card-back' src={back} />;
   const questionImage = <Image className='room-charaters-card-question' src={question} />;
+  const selectedPos = useSelectedPositions(players);
+
+  const submittedBoard = [...Array(MaxPlayersNumber).keys()].map((index) => (
+    <View key={index}>
+      <View key={index} className='room-begin-card'>
+        {index < playersNumber ? (
+          <Image
+            onClick={handleClick(index)}
+            className={classNames('room-begin-card-show', { 'room-begin-card-show-dead': deadArray[index] })}
+            src={getImageFont(selectedPos.get(index) || 'none')}
+          />
+        ) : (
+          <Image className='room-begin-card-lock' src={lock} />
+        )}
+        {deadArray[index] && <Text className='room-begin-card-show-deadtext'>已出局</Text>}
+      </View>
+      <View className='room-begin-card-cnt'>{index + 1}</View>
+    </View>
+  ));
 
   return (
     <View className='room'>
-      <GameHeader roomNumber={roomNumber} />
+      {!submitted && <GameHeader roomNumber={roomNumber} />}
       {action}
       <View className='room-charaters'>
-        {[...Array(MaxPlayersNumber).keys()].map((index) => (
-          <View key={`no-${index}`} className='room-charaters-card'>
-            {index < playersNumber ? (
-              <View>
-                {index >= lastPlayer ? questionImage : backImage}
-                {index >= lastPlayer && <View className='room-charaters-card-cnt'>{index + 1}</View>}
+        {submitted
+          ? submittedBoard
+          : [...Array(MaxPlayersNumber).keys()].map((index) => (
+              <View key={`no-${index}`} className='room-charaters-card'>
+                {index < playersNumber ? (
+                  <View>
+                    {index >= lastPlayer ? questionImage : backImage}
+                    {index >= lastPlayer && <View className='room-charaters-card-cnt'>{index + 1}</View>}
+                  </View>
+                ) : (
+                  <Image className='room-charaters-card-lock' src={lock} />
+                )}
               </View>
-            ) : (
-              <Image className='room-charaters-card-lock' src={lock} />
-            )}
-          </View>
-        ))}
+            ))}
       </View>
     </View>
   );

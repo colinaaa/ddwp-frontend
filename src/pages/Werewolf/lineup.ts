@@ -51,6 +51,7 @@ import {
   wolfKingShow,
   knightShow,
   backShow,
+  back,
 } from '@static/werewolf';
 
 const charaterNames = [
@@ -109,6 +110,7 @@ const imgFont = {
   狼美人: wolfbeautyFont,
   白狼王: wolfKingFont,
   骑士: knightFont,
+  none: back,
 };
 
 const imgShow = {

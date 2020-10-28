@@ -1,4 +1,4 @@
-import Taro, { FC, useRouter } from '@tarojs/taro';
+import Taro, { FC, useCallback, useRouter, useState } from '@tarojs/taro';
 import { View, Image, Text } from '@tarojs/components';
 
 import { getImageShow } from './lineup';
@@ -7,12 +7,18 @@ import './show.less';
 
 const Show: FC = () => {
   const {
-    params: { pos, charater = 'none' },
+    params: { pos, charater },
   } = useRouter();
+
+  const [back, setBack] = useState(false);
+
+  const handleTurn = useCallback(() => {
+    setBack((back) => !back);
+  }, []);
 
   return (
     <View className='show'>
-      <Image src={getImageShow(charater)} className='show-img' />
+      <Image onClick={handleTurn} src={getImageShow(back ? charater || 'none' : 'none')} className='show-img' />
       <Text className='show-position'>{pos}</Text>
     </View>
   );

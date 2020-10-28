@@ -23,6 +23,14 @@ const SHUFFLE = gql`
   }
 `;
 
+const END_GAME = gql`
+  mutation endGame($roomNumber: Int!) {
+    endGame(roomNumber: $roomNumber) {
+      roomNumber
+    }
+  }
+`;
+
 const JOIN_ROOM = gql`
   mutation joinRoom($roomNumber: Int!) {
     joinRoom(roomNumber: $roomNumber) {
@@ -44,7 +52,7 @@ const CREATE_ROOM = gql`
   }
 `;
 
-const Mutation = { CREATE_ROOM, SHUFFLE, SELECT_POSITION, JOIN_ROOM };
+const Mutation = { CREATE_ROOM, SHUFFLE, SELECT_POSITION, JOIN_ROOM, END_GAME };
 
 export { Mutation };
 

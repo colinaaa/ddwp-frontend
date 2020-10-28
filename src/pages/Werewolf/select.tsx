@@ -1,4 +1,4 @@
-import Taro, { FC, navigateTo, useCallback, useMemo, useRouter, useState } from '@tarojs/taro';
+import Taro, { FC, navigateTo, showModal, useCallback, useMemo, useRouter, useState } from '@tarojs/taro';
 import { View, Image, Button } from '@tarojs/components';
 import classNames from 'classnames';
 
@@ -72,15 +72,6 @@ const Select: FC = () => {
     setSelected(index);
   };
 
-  const handleConfirm = async () => {
-    const { errors } = await select({ variables: { roomNumber, pos: selected } });
-    if (errors) {
-      console.error(errors);
-      return false;
-    }
-    setSubmitted(true);
-  };
-
   if (roomNumber && !called) {
     queryRoom({ variables: { roomNumber } });
   }
@@ -107,6 +98,16 @@ const Select: FC = () => {
   const handleClose = useCallback(() => {
     navigateTo({ url: `show?charater=${charater}&pos=${selected + 1}` });
   }, [charater, selected]);
+
+  const handleConfirm = useCallback(async () => {
+    const { errors } = await select({ variables: { roomNumber, pos: selected } });
+    if (errors) {
+      console.error(errors);
+      showModal({ title: '选择错误', content: errors.map(({ message }) => message).join(' ') });
+      return false;
+    }
+    setSubmitted(true);
+  }, [roomNumber, selected, selectedPositions]);
 
   return (
     <View className='select'>

@@ -89,6 +89,34 @@ export interface shuffleVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: endGame
+// ====================================================
+
+export interface endGame_endGame {
+  __typename: "WerewolfRoom";
+  /**
+   * 房间号
+   */
+  roomNumber: number;
+}
+
+export interface endGame {
+  /**
+   * 结束游戏
+   */
+  endGame: endGame_endGame;
+}
+
+export interface endGameVariables {
+  roomNumber: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: joinRoom
 // ====================================================
 

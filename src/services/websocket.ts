@@ -8,16 +8,13 @@ import {
   onSocketOpen,
   sendSocketMessage,
 } from '@tarojs/taro';
-import { EventEmitter } from 'events';
 
-class WebSocket extends EventEmitter {
+class WebSocket {
   private static _instance: WebSocket | null = null;
 
   readyState: number;
 
   constructor(url: string, protocols?: string | string[]) {
-    super();
-
     if (WebSocket._instance !== null) {
       return WebSocket._instance;
     }
@@ -32,25 +29,32 @@ class WebSocket extends EventEmitter {
       protocols: typeof protocols === 'string' ? [protocols] : protocols,
     });
 
-    onSocketClose(({ code, reason }) => {
+    onSocketClose((data) => {
       this.readyState = WebSocket.CLOSED;
 
-      this.emit('close', code, reason);
-      this.removeAllListeners();
+      if (this.onclose) {
+        this.onclose(data);
+      }
     });
 
     onSocketError((err) => {
-      this.emit('error', err);
+      if (this.onerror) {
+        this.onerror(err);
+      }
     });
 
     onSocketMessage((message) => {
-      this.emit('message', message);
+      if (this.onmessage) {
+        this.onmessage(message);
+      }
     });
 
     onSocketOpen((head) => {
       this.readyState = WebSocket.OPEN;
 
-      this.emit('open', head);
+      if (this.onopen) {
+        this.onopen(head);
+      }
     });
 
     WebSocket._instance = this;
@@ -81,73 +85,10 @@ class WebSocket extends EventEmitter {
     });
   }
 
-  get onopen() {
-    const listeners = this.listeners('open');
-
-    for (let i = 0; i < listeners.length; i++) {
-      const l = listeners[i];
-      if (l) {
-        return l;
-      }
-    }
-  }
-
-  set onopen(listener: any) {
-    this.addListener('open', listener);
-  }
-
-  get onclose() {
-    const listeners = this.listeners('close');
-
-    for (let i = 0; i < listeners.length; i++) {
-      const l = listeners[i];
-      if (l) {
-        return l;
-      }
-    }
-    return undefined;
-  }
-
-  set onclose(listener: any) {
-    this.addListener('close', listener);
-  }
-
-  get onmessage() {
-    const listeners = this.listeners('message');
-
-    for (let i = 0; i < listeners.length; i++) {
-      const l = listeners[i];
-      if (l) {
-        return l;
-      }
-    }
-    return undefined;
-  }
-
-  set onmessage(listener: any) {
-    this.addListener('message', listener);
-  }
-
-  get onerror() {
-    const listeners = this.listeners('error');
-
-    for (let i = 0; i < listeners.length; i++) {
-      const l = listeners[i];
-      if (l) {
-        return l;
-      }
-    }
-    return undefined;
-  }
-
-  set onerror(listener: any) {
-    this.addListener('error', listener);
-  }
-
-  // onclose: ((this: WebSocket, ev: any) => any) | null;
-  // onerror: ((this: WebSocket, ev: any) => any) | null;
-  // onmessage: ((this: WebSocket, ev: any) => any) | null;
-  // onopen: ((this: WebSocket, ev: any) => any) | null;
+  onclose: ((this: WebSocket, ev: any) => any) | null;
+  onerror: ((this: WebSocket, ev: any) => any) | null;
+  onmessage: ((this: WebSocket, ev: any) => any) | null;
+  onopen: ((this: WebSocket, ev: any) => any) | null;
 
   static readonly CONNECTING = 0; // The connection is not yet open.
   static readonly OPEN = 1; // The connection is open and ready to communicate.
