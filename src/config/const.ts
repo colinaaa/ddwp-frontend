@@ -12,6 +12,10 @@ const getRoute = (game: string): string => {
   return nameToRoute[game];
 };
 
-const GraphQLEndpoint = 'https://ddwp.outsiders.top/graphql';
+const isDev = process.env.NODE_ENV === '"development"';
 
-export { cardNames, nameToRoute, getRoute, GraphQLEndpoint };
+const GraphQLEndpoint = isDev ? 'http://localhost:4000/graphql' : 'https://ddwp.outsiders.top/graphql';
+
+const WsEndpoint = isDev ? 'ws://localhost:4000/ws' : 'wss://ddwp.outsiders.top/ws';
+
+export { cardNames, nameToRoute, getRoute, GraphQLEndpoint, WsEndpoint, isDev };
