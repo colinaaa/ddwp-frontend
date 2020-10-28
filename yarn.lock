@@ -13872,10 +13872,10 @@ tar@^6.0.2:
     mkdirp "^1.0.3"
     yallist "^4.0.0"
 
-taro-apollo-client@2.2.17-0:
-  version "2.2.17-0"
-  resolved "https://registry.yarnpkg.com/taro-apollo-client/-/taro-apollo-client-2.2.17-0.tgz#cd8650ffb4d2f306b8ab68d93c277ba8cbae6873"
-  integrity sha512-Yx5y8qXPwaDpJKRw/4MOu3+gEBrneh22umgeOVaKtH1QJWL71yINq3/lUKxJUAjim4jw/AJZ5Nh0fMHzQtNgzg==
+taro-apollo-client@2.2.17:
+  version "2.2.17"
+  resolved "https://registry.yarnpkg.com/taro-apollo-client/-/taro-apollo-client-2.2.17.tgz#6281fd09f7c3e398c23c791910842ffd16becd3f"
+  integrity sha512-+lA9I/ra2DEcL9zR3btzen5TFyMo4Yw2PSpt2N1NR4rESxUEb61D+bEtHbMBURykD3plzerNeZIi6/VdmNfypQ==
   dependencies:
     "@graphql-typed-document-node/core" "^3.0.0"
     "@tarojs/taro" v2
