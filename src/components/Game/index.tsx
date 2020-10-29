@@ -2,7 +2,7 @@ import Modal from '@components/Modal';
 import { useMutation } from '@hooks/useQuery';
 import { joinRoom, joinRoomVariables } from '@services/graphql';
 import { View, Button, Input } from '@tarojs/components';
-import Taro, { FC, setNavigationBarTitle, showModal, navigateTo, useState, useCallback, useEffect } from '@tarojs/taro';
+import Taro, { FC, setNavigationBarTitle, navigateTo, useState, useCallback, useEffect } from '@tarojs/taro';
 
 import './index.less';
 
@@ -32,11 +32,16 @@ const Game: FC<Props> = ({ name }) => {
   const handleConfirm = useCallback(async () => {
     await join({ variables: { roomNumber: +roomNumber } });
     // TODO: deal with join error here
+    setRoomNumber('');
     navigateTo({ url: `select?roomNumber=${roomNumber}` });
   }, [roomNumber]);
 
   const handleChange = useCallback((e) => {
     setRoomNumber(e.detail.value);
+  }, []);
+
+  const handleIntro = useCallback(() => {
+    navigateTo({ url: 'intro' });
   }, []);
 
   // BUG(2020-10-20): input something and not click confirm but somewhere in modal to
@@ -69,13 +74,7 @@ const Game: FC<Props> = ({ name }) => {
         加入房间
       </Button>
 
-      <Button
-        className='game-btn'
-        onClick={() =>
-          // TODO: use own modal
-          showModal({ title: '游戏简介' })
-        }
-      >
+      <Button className='game-btn' onClick={handleIntro}>
         游戏简介
       </Button>
     </View>
