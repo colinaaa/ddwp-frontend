@@ -1,4 +1,4 @@
-const cardNames = ['狼人杀', '谁是卧底', '德国心脏病', '阿瓦隆', 'UNO'];
+const cardNames = ['狼人杀', '谁是卧底', '德国心脏病', '阿瓦隆', 'UNO', ''];
 
 const nameToRoute = {
   UNO: '',
