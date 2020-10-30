@@ -1,8 +1,7 @@
-import Taro, { FC, navigateTo } from '@tarojs/taro';
-import { View, Button, Text } from '@tarojs/components';
+import Taro, { FC, navigateTo, useCallback, useMemo } from '@tarojs/taro';
+import { View, Button } from '@tarojs/components';
 
 import { getRoute } from '@config/const';
-import { useQuery } from '@hooks/useQuery';
 
 import './index.less';
 
@@ -11,26 +10,19 @@ interface Props {
 }
 
 const Card: FC<Props> = ({ name }: Props) => {
-  // const { loading, error, data } = useQuery('GET_ALL_ROOMS');
+  const url = getRoute(name);
 
-  // if (loading) {
-  //   return <View>loading...</View>;
-  // }
-  // if (error || !data) {
-  //   console.log(error);
-  //   return <View>error...</View>;
-  // }
+  const handleClick = useCallback(() => {
+    navigateTo({ url });
+  }, [url]);
 
-  // if (!data.allRooms) {
-  //   return <Text>no room avaliable</Text>;
-  // }
+  const hasGame = useMemo(() => !!url, [url]);
 
   return (
     <View className='gamecard-root'>
-      {/* {data.allRooms.map((room) => (
-        <Text key={room.roomNumber}>{room.roomNumber}</Text>
-      ))} */}
-      <Button onClick={() => navigateTo({ url: getRoute(name) })}>{name}</Button>
+      <Button onClick={handleClick} disabled={!hasGame}>
+        {hasGame ? name : '敬请期待'}
+      </Button>
     </View>
   );
 };
