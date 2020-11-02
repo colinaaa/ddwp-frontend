@@ -10,8 +10,8 @@ import {
   getRoomVariables,
   OnRoomUpdated,
   OnRoomUpdatedVariables,
-  selectPosition,
-  selectPositionVariables,
+  werewolfSelectPos,
+  werewolfSelectPosVariables,
 } from '@services/graphql';
 import { lock } from '@static/werewolf';
 
@@ -29,7 +29,7 @@ const Select: FC = () => {
   const [submitted, setSubmitted] = useState(false);
 
   const [room, setRoom] = useState<getRoom>({
-    roomByNumber: {
+    werewolfRoomByNumber: {
       roomNumber: 0,
       players: [],
       playersNumber: 0,
@@ -42,23 +42,28 @@ const Select: FC = () => {
   });
 
   useSubscription<OnRoomUpdated, OnRoomUpdatedVariables>(
-    'SUB_ROOM_UPDATED',
+    'WEREWOLF_SUB_ROOM_UPDATED',
     { roomNumber },
     {
       onSubscriptionData: ({ subscriptionData: { data } }) =>
         data &&
-        data.roomUpdated &&
-        setRoom(({ roomByNumber }) => ({ roomByNumber: { ...roomByNumber, ...data.roomUpdated } })),
+        data.werewolfRoomUpdated &&
+        setRoom(({ werewolfRoomByNumber }) => ({
+          werewolfRoomByNumber: { ...werewolfRoomByNumber, ...data.werewolfRoomUpdated },
+        })),
     },
   );
 
-  const [select] = useMutation<selectPosition, selectPositionVariables>('SELECT_POSITION', {
-    onCompleted: ({ selectPosition }) =>
-      setRoom(({ roomByNumber }) => ({ roomByNumber: { ...roomByNumber, ...selectPosition } })),
+  const [select] = useMutation<werewolfSelectPos, werewolfSelectPosVariables>('WEREWOLF_SELECT_POSITION', {
+    onCompleted: ({ werewolfSelectPos }) =>
+      setRoom(({ werewolfRoomByNumber }) => ({
+        werewolfRoomByNumber: { ...werewolfRoomByNumber, ...werewolfSelectPos },
+      })),
   });
 
-  const [queryRoom, { called }] = useLazyQuery<getRoom, getRoomVariables>('GET_ROOM', undefined, {
-    onCompleted: ({ roomByNumber }) => setRoom((pre) => ({ roomByNumber: { ...pre.roomByNumber, ...roomByNumber } })),
+  const [queryRoom, { called }] = useLazyQuery<getRoom, getRoomVariables>('WEREWOLF_GET_ROOM', undefined, {
+    onCompleted: ({ werewolfRoomByNumber }) =>
+      setRoom((pre) => ({ werewolfRoomByNumber: { ...pre.werewolfRoomByNumber, ...werewolfRoomByNumber } })),
   });
 
   const handleSelect = (index: number) => () => {
@@ -76,7 +81,7 @@ const Select: FC = () => {
     queryRoom({ variables: { roomNumber } });
   }
 
-  const { players, playersNumber } = room.roomByNumber;
+  const { players, playersNumber } = room.werewolfRoomByNumber;
 
   const selectedPositions = useMemo(
     () =>

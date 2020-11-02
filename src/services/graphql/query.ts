@@ -1,16 +1,16 @@
 import { gql } from 'taro-apollo-client';
 
-const GET_ALL_ROOMS = gql`
+const WEREWOLF_GET_ALL_ROOMS = gql`
   query getAllRooms {
-    allRooms {
+    werewolfRooms {
       roomNumber
     }
   }
 `;
 
-const GET_ROOM = gql`
+const WEREWOLF_GET_ROOM = gql`
   query getRoom($roomNumber: Int!) {
-    roomByNumber(number: $roomNumber) {
+    werewolfRoomByNumber(number: $roomNumber) {
       roomNumber
       players {
         role
@@ -31,8 +31,8 @@ const GET_ROOM = gql`
   }
 `;
 
-const Query = { GET_ALL_ROOMS, GET_ROOM };
+const Query = { WEREWOLF_GET_ALL_ROOMS, WEREWOLF_GET_ROOM };
 
-export { GET_ALL_ROOMS, GET_ROOM, Query };
+export { Query };
 
 export default Query;

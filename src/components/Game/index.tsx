@@ -1,6 +1,6 @@
 import Modal from '@components/Modal';
+import { getJoinRoom } from '@config/const';
 import { useMutation } from '@hooks/useQuery';
-import { joinRoom, joinRoomVariables } from '@services/graphql';
 import { View, Button, Input } from '@tarojs/components';
 import Taro, { FC, setNavigationBarTitle, navigateTo, useState, useCallback, useEffect } from '@tarojs/taro';
 
@@ -16,7 +16,7 @@ const Game: FC<Props> = ({ name }) => {
     setNavigationBarTitle({ title: name });
   }, []);
 
-  const [join] = useMutation<joinRoom, joinRoomVariables>('JOIN_ROOM');
+  const [join] = useMutation(getJoinRoom(name));
 
   const [open, setOpen] = useState(false);
   const [roomNumber, setRoomNumber] = useState('');

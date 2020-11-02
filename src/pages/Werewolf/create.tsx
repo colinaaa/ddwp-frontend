@@ -4,7 +4,7 @@ import Taro, { FC, useState, useCallback, navigateTo } from '@tarojs/taro';
 import Modal from '@components/Modal';
 import Card from '@components/Card';
 import { useMutation } from '@hooks/useQuery';
-import { createRoom as createRoomT, createRoomVariables, GameType } from '@services/graphql';
+import { werewolfCreateRoom, werewolfCreateRoomVariables, GameType } from '@services/graphql';
 
 import { charaterNames, getImageFont, getImageSquare } from './lineup';
 
@@ -20,11 +20,11 @@ const Create: FC = () => {
   const [current, setCurrent] = useState({ name: '', count: 0 });
   const [lineup, setLineup] = useState(Object.fromEntries(charaterNames.map((name) => [name, 0])));
 
-  const [createRoom, { data }] = useMutation<createRoomT, createRoomVariables>('CREATE_ROOM');
+  const [createRoom, { data }] = useMutation<werewolfCreateRoom, werewolfCreateRoomVariables>('WEREWOLF_CREATE_ROOM');
 
   if (data) {
     const {
-      createRoom: { roomNumber },
+      werewolfCreateRoom: { roomNumber },
     } = data;
     navigateTo({ url: `room?roomNumber=${roomNumber}` });
   }

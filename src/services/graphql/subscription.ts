@@ -1,8 +1,8 @@
 import { gql } from 'taro-apollo-client';
 
-const SUB_ROOM_UPDATED = gql`
+const WEREWOLF_SUB_ROOM_UPDATED = gql`
   subscription OnRoomUpdated($roomNumber: Int!) {
-    roomUpdated(roomNumber: $roomNumber) {
+    werewolfRoomUpdated(roomNumber: $roomNumber) {
       roomNumber
       playersNumber
       players {
@@ -22,7 +22,7 @@ const SUB_ROOM_UPDATED = gql`
   }
 `;
 
-const Subscription = { SUB_ROOM_UPDATED };
+const Subscription = { WEREWOLF_SUB_ROOM_UPDATED };
 
 export { Subscription };
 

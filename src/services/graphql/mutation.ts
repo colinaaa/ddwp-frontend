@@ -1,8 +1,8 @@
 import { gql } from 'taro-apollo-client';
 
-const SELECT_POSITION = gql`
-  mutation selectPosition($pos: Int!, $roomNumber: Int!) {
-    selectPosition(position: $pos, roomNumber: $roomNumber) {
+const WEREWOLF_SELECT_POSITION = gql`
+  mutation werewolfSelectPos($pos: Int!, $roomNumber: Int!) {
+    werewolfSelectPos(position: $pos, roomNumber: $roomNumber) {
       roomNumber
       players {
         role
@@ -12,9 +12,9 @@ const SELECT_POSITION = gql`
   }
 `;
 
-const SHUFFLE = gql`
-  mutation shuffle($roomNumber: Int!) {
-    deal(roomNumber: $roomNumber) {
+const WEREWOLF_SHUFFLE = gql`
+  mutation werewolfDeal($roomNumber: Int!) {
+    werewolfDeal(roomNumber: $roomNumber) {
       players {
         position
         role
@@ -23,17 +23,17 @@ const SHUFFLE = gql`
   }
 `;
 
-const END_GAME = gql`
-  mutation endGame($roomNumber: Int!) {
-    endGame(roomNumber: $roomNumber) {
+const WEREWOLF_END_GAME = gql`
+  mutation werewolfEndGame($roomNumber: Int!) {
+    werewolfEndGame(roomNumber: $roomNumber) {
       roomNumber
     }
   }
 `;
 
-const JOIN_ROOM = gql`
-  mutation joinRoom($roomNumber: Int!) {
-    joinRoom(roomNumber: $roomNumber) {
+const WEREWOLF_JOIN_ROOM = gql`
+  mutation werewolfJoinRoom($roomNumber: Int!) {
+    werewolfJoinRoom(roomNumber: $roomNumber) {
       roomNumber
       players {
         position
@@ -43,16 +43,22 @@ const JOIN_ROOM = gql`
   }
 `;
 
-const CREATE_ROOM = gql`
-  mutation createRoom($config: InputGameConfig!) {
-    createRoom(config: $config) {
+const WEREWOLF_CREATE_ROOM = gql`
+  mutation werewolfCreateRoom($config: InputGameConfig!) {
+    werewolfCreateRoom(config: $config) {
       roomNumber
       playersNumber
     }
   }
 `;
 
-const Mutation = { CREATE_ROOM, SHUFFLE, SELECT_POSITION, JOIN_ROOM, END_GAME };
+const Mutation = {
+  WEREWOLF_CREATE_ROOM,
+  WEREWOLF_SHUFFLE,
+  WEREWOLF_SELECT_POSITION,
+  WEREWOLF_JOIN_ROOM,
+  WEREWOLF_END_GAME,
+};
 
 export { Mutation };
 

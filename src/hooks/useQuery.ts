@@ -9,14 +9,8 @@ import {
   SubscriptionHookOptions,
 } from 'taro-apollo-client';
 
-import { Query, Mutation, Subscription } from '@services/graphql';
+import { Query, Mutation, Subscription, QueryKey, MutationKey, SubscriptionKey } from '@services/graphql';
 import { client } from '@services/apollo';
-
-type QueryKey = keyof typeof Query;
-
-type MutationKey = keyof typeof Mutation;
-
-type SubscriptionKey = keyof typeof Subscription;
 
 const useLazyQuery = <Q, Arg>(query: QueryKey, args?: Arg, options?: LazyQueryHookOptions<Q, Arg>) =>
   useApolloLazyQuery<Q, Arg>(Query[query], { client, variables: args, ...options });

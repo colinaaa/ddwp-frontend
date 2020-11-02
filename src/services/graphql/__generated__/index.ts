@@ -4,10 +4,10 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: selectPosition
+// GraphQL mutation operation: werewolfSelectPos
 // ====================================================
 
-export interface selectPosition_selectPosition_players {
+export interface werewolfSelectPos_werewolfSelectPos_players {
   __typename: "Player";
   /**
    * 角色
@@ -19,7 +19,7 @@ export interface selectPosition_selectPosition_players {
   position: number;
 }
 
-export interface selectPosition_selectPosition {
+export interface werewolfSelectPos_werewolfSelectPos {
   __typename: "WerewolfRoom";
   /**
    * 房间号
@@ -28,17 +28,17 @@ export interface selectPosition_selectPosition {
   /**
    * 玩家信息
    */
-  players: selectPosition_selectPosition_players[] | null;
+  players: werewolfSelectPos_werewolfSelectPos_players[] | null;
 }
 
-export interface selectPosition {
+export interface werewolfSelectPos {
   /**
    * 选择位置
    */
-  selectPosition: selectPosition_selectPosition;
+  werewolfSelectPos: werewolfSelectPos_werewolfSelectPos;
 }
 
-export interface selectPositionVariables {
+export interface werewolfSelectPosVariables {
   pos: number;
   roomNumber: number;
 }
@@ -49,10 +49,10 @@ export interface selectPositionVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: shuffle
+// GraphQL mutation operation: werewolfDeal
 // ====================================================
 
-export interface shuffle_deal_players {
+export interface werewolfDeal_werewolfDeal_players {
   __typename: "Player";
   /**
    * 位置
@@ -64,22 +64,22 @@ export interface shuffle_deal_players {
   role: string | null;
 }
 
-export interface shuffle_deal {
+export interface werewolfDeal_werewolfDeal {
   __typename: "WerewolfRoom";
   /**
    * 玩家信息
    */
-  players: shuffle_deal_players[] | null;
+  players: werewolfDeal_werewolfDeal_players[] | null;
 }
 
-export interface shuffle {
+export interface werewolfDeal {
   /**
    * 开始发牌
    */
-  deal: shuffle_deal;
+  werewolfDeal: werewolfDeal_werewolfDeal;
 }
 
-export interface shuffleVariables {
+export interface werewolfDealVariables {
   roomNumber: number;
 }
 
@@ -89,10 +89,10 @@ export interface shuffleVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: endGame
+// GraphQL mutation operation: werewolfEndGame
 // ====================================================
 
-export interface endGame_endGame {
+export interface werewolfEndGame_werewolfEndGame {
   __typename: "WerewolfRoom";
   /**
    * 房间号
@@ -100,14 +100,14 @@ export interface endGame_endGame {
   roomNumber: number;
 }
 
-export interface endGame {
+export interface werewolfEndGame {
   /**
    * 结束游戏
    */
-  endGame: endGame_endGame;
+  werewolfEndGame: werewolfEndGame_werewolfEndGame;
 }
 
-export interface endGameVariables {
+export interface werewolfEndGameVariables {
   roomNumber: number;
 }
 
@@ -117,10 +117,10 @@ export interface endGameVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: joinRoom
+// GraphQL mutation operation: werewolfJoinRoom
 // ====================================================
 
-export interface joinRoom_joinRoom_players {
+export interface werewolfJoinRoom_werewolfJoinRoom_players {
   __typename: "Player";
   /**
    * 位置
@@ -128,7 +128,7 @@ export interface joinRoom_joinRoom_players {
   position: number;
 }
 
-export interface joinRoom_joinRoom {
+export interface werewolfJoinRoom_werewolfJoinRoom {
   __typename: "WerewolfRoom";
   /**
    * 房间号
@@ -137,21 +137,21 @@ export interface joinRoom_joinRoom {
   /**
    * 玩家信息
    */
-  players: joinRoom_joinRoom_players[] | null;
+  players: werewolfJoinRoom_werewolfJoinRoom_players[] | null;
   /**
    * 玩家人数
    */
   playersNumber: number;
 }
 
-export interface joinRoom {
+export interface werewolfJoinRoom {
   /**
    * 加入房间
    */
-  joinRoom: joinRoom_joinRoom;
+  werewolfJoinRoom: werewolfJoinRoom_werewolfJoinRoom;
 }
 
-export interface joinRoomVariables {
+export interface werewolfJoinRoomVariables {
   roomNumber: number;
 }
 
@@ -161,10 +161,10 @@ export interface joinRoomVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: createRoom
+// GraphQL mutation operation: werewolfCreateRoom
 // ====================================================
 
-export interface createRoom_createRoom {
+export interface werewolfCreateRoom_werewolfCreateRoom {
   __typename: "WerewolfRoom";
   /**
    * 房间号
@@ -176,14 +176,14 @@ export interface createRoom_createRoom {
   playersNumber: number;
 }
 
-export interface createRoom {
+export interface werewolfCreateRoom {
   /**
    * 创建房间
    */
-  createRoom: createRoom_createRoom;
+  werewolfCreateRoom: werewolfCreateRoom_werewolfCreateRoom;
 }
 
-export interface createRoomVariables {
+export interface werewolfCreateRoomVariables {
   config: InputGameConfig;
 }
 
@@ -196,7 +196,7 @@ export interface createRoomVariables {
 // GraphQL query operation: getAllRooms
 // ====================================================
 
-export interface getAllRooms_allRooms {
+export interface getAllRooms_werewolfRooms {
   __typename: "WerewolfRoom";
   /**
    * 房间号
@@ -205,7 +205,7 @@ export interface getAllRooms_allRooms {
 }
 
 export interface getAllRooms {
-  allRooms: getAllRooms_allRooms[] | null;
+  werewolfRooms: getAllRooms_werewolfRooms[] | null;
 }
 
 /* tslint:disable */
@@ -217,7 +217,7 @@ export interface getAllRooms {
 // GraphQL query operation: getRoom
 // ====================================================
 
-export interface getRoom_roomByNumber_players {
+export interface getRoom_werewolfRoomByNumber_players {
   __typename: "Player";
   /**
    * 角色
@@ -229,7 +229,7 @@ export interface getRoom_roomByNumber_players {
   position: number;
 }
 
-export interface getRoom_roomByNumber_gameConfig_lineup {
+export interface getRoom_werewolfRoomByNumber_gameConfig_lineup {
   __typename: "Role";
   /**
    * 角色名称
@@ -241,7 +241,7 @@ export interface getRoom_roomByNumber_gameConfig_lineup {
   count: number;
 }
 
-export interface getRoom_roomByNumber_gameConfig {
+export interface getRoom_werewolfRoomByNumber_gameConfig {
   __typename: "WerewolfConfig";
   /**
    * 总人数
@@ -250,10 +250,10 @@ export interface getRoom_roomByNumber_gameConfig {
   /**
    * 阵容
    */
-  lineup: getRoom_roomByNumber_gameConfig_lineup[] | null;
+  lineup: getRoom_werewolfRoomByNumber_gameConfig_lineup[] | null;
 }
 
-export interface getRoom_roomByNumber {
+export interface getRoom_werewolfRoomByNumber {
   __typename: "WerewolfRoom";
   /**
    * 房间号
@@ -262,7 +262,7 @@ export interface getRoom_roomByNumber {
   /**
    * 玩家信息
    */
-  players: getRoom_roomByNumber_players[] | null;
+  players: getRoom_werewolfRoomByNumber_players[] | null;
   /**
    * 玩家人数
    */
@@ -274,7 +274,7 @@ export interface getRoom_roomByNumber {
   /**
    * 狼人杀游戏配置
    */
-  gameConfig: getRoom_roomByNumber_gameConfig;
+  gameConfig: getRoom_werewolfRoomByNumber_gameConfig;
   /**
    * 是否开始
    */
@@ -289,7 +289,7 @@ export interface getRoom {
   /**
    * 查询房间
    */
-  roomByNumber: getRoom_roomByNumber;
+  werewolfRoomByNumber: getRoom_werewolfRoomByNumber;
 }
 
 export interface getRoomVariables {
@@ -305,7 +305,7 @@ export interface getRoomVariables {
 // GraphQL subscription operation: OnRoomUpdated
 // ====================================================
 
-export interface OnRoomUpdated_roomUpdated_players {
+export interface OnRoomUpdated_werewolfRoomUpdated_players {
   __typename: "Player";
   /**
    * 位置
@@ -317,7 +317,7 @@ export interface OnRoomUpdated_roomUpdated_players {
   role: string | null;
 }
 
-export interface OnRoomUpdated_roomUpdated_gameConfig_lineup {
+export interface OnRoomUpdated_werewolfRoomUpdated_gameConfig_lineup {
   __typename: "Role";
   /**
    * 角色名称
@@ -329,7 +329,7 @@ export interface OnRoomUpdated_roomUpdated_gameConfig_lineup {
   count: number;
 }
 
-export interface OnRoomUpdated_roomUpdated_gameConfig {
+export interface OnRoomUpdated_werewolfRoomUpdated_gameConfig {
   __typename: "WerewolfConfig";
   /**
    * 总人数
@@ -338,10 +338,10 @@ export interface OnRoomUpdated_roomUpdated_gameConfig {
   /**
    * 阵容
    */
-  lineup: OnRoomUpdated_roomUpdated_gameConfig_lineup[] | null;
+  lineup: OnRoomUpdated_werewolfRoomUpdated_gameConfig_lineup[] | null;
 }
 
-export interface OnRoomUpdated_roomUpdated {
+export interface OnRoomUpdated_werewolfRoomUpdated {
   __typename: "WerewolfRoom";
   /**
    * 房间号
@@ -354,11 +354,11 @@ export interface OnRoomUpdated_roomUpdated {
   /**
    * 玩家信息
    */
-  players: OnRoomUpdated_roomUpdated_players[] | null;
+  players: OnRoomUpdated_werewolfRoomUpdated_players[] | null;
   /**
    * 狼人杀游戏配置
    */
-  gameConfig: OnRoomUpdated_roomUpdated_gameConfig;
+  gameConfig: OnRoomUpdated_werewolfRoomUpdated_gameConfig;
   /**
    * 是否开始
    */
@@ -371,9 +371,9 @@ export interface OnRoomUpdated_roomUpdated {
 
 export interface OnRoomUpdated {
   /**
-   * 订阅狼人杀房间变化
+   * 订阅房间变化
    */
-  roomUpdated: OnRoomUpdated_roomUpdated;
+  werewolfRoomUpdated: OnRoomUpdated_werewolfRoomUpdated;
 }
 
 export interface OnRoomUpdatedVariables {

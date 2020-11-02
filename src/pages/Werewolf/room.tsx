@@ -7,10 +7,10 @@ import {
   getRoomVariables,
   OnRoomUpdated,
   OnRoomUpdatedVariables,
-  shuffle,
-  shuffleVariables,
-  endGame,
-  endGameVariables,
+  werewolfDeal,
+  werewolfDealVariables,
+  werewolfEndGame,
+  werewolfEndGameVariables,
 } from '@services/graphql';
 import { useLazyQuery, useMutation, useSubscription } from '@hooks/useQuery';
 import { god, question, back, lock } from '@static/werewolf';
@@ -34,7 +34,7 @@ const Room: FC<Props> = () => {
   const [deadArray, setDeadArray] = useState<Array<boolean>>(() => Array(MaxPlayersNumber).fill(false));
 
   const [room, setRoom] = useState<OnRoomUpdated>({
-    roomUpdated: {
+    werewolfRoomUpdated: {
       players: [],
       playersNumber: MaxPlayersNumber + 1,
       __typename: 'WerewolfRoom',
@@ -45,11 +45,12 @@ const Room: FC<Props> = () => {
     },
   });
 
-  const [deal] = useMutation<shuffle, shuffleVariables>('SHUFFLE', {
-    onCompleted: ({ deal }) => setRoom(({ roomUpdated }) => ({ roomUpdated: { ...roomUpdated, ...deal } })),
+  const [deal] = useMutation<werewolfDeal, werewolfDealVariables>('WEREWOLF_SHUFFLE', {
+    onCompleted: ({ werewolfDeal }) =>
+      setRoom(({ werewolfRoomUpdated }) => ({ werewolfRoomUpdated: { ...werewolfRoomUpdated, ...werewolfDeal } })),
   });
 
-  const [end] = useMutation<endGame, endGameVariables>('END_GAME', {
+  const [end] = useMutation<werewolfEndGame, werewolfEndGameVariables>('WEREWOLF_END_GAME', {
     onCompleted: () => navigateTo({ url: 'index' }),
   });
 
@@ -63,7 +64,7 @@ const Room: FC<Props> = () => {
   }, [roomNumber, submitted]);
 
   useSubscription<OnRoomUpdated, OnRoomUpdatedVariables>(
-    'SUB_ROOM_UPDATED',
+    'WEREWOLF_SUB_ROOM_UPDATED',
     {
       roomNumber,
     },
@@ -73,16 +74,18 @@ const Room: FC<Props> = () => {
     },
   );
 
-  const [queryRoom, { called }] = useLazyQuery<getRoom, getRoomVariables>('GET_ROOM', undefined, {
-    onCompleted: ({ roomByNumber }) =>
-      setRoom(({ roomUpdated }) => ({ roomUpdated: { ...roomUpdated, ...roomByNumber } })),
+  const [queryRoom, { called }] = useLazyQuery<getRoom, getRoomVariables>('WEREWOLF_GET_ROOM', undefined, {
+    onCompleted: ({ werewolfRoomByNumber }) =>
+      setRoom(({ werewolfRoomUpdated }) => ({
+        werewolfRoomUpdated: { ...werewolfRoomUpdated, ...werewolfRoomByNumber },
+      })),
   });
 
   if (roomNumber && !called) {
     queryRoom({ variables: { roomNumber } });
   }
 
-  const { playersNumber, players } = room.roomUpdated;
+  const { playersNumber, players } = room.werewolfRoomUpdated;
 
   const handleClick = (index: number) => () => {
     setDeadArray((pre) => {
