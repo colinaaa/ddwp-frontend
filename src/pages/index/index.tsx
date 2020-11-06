@@ -3,7 +3,7 @@
 import Taro, { Component, Config } from '@tarojs/taro';
 import { View } from '@tarojs/components';
 
-import GameCard from '@components/GameCard/index';
+import GameCard from '@components/GameCard';
 import { cardNames } from '@config/const';
 
 import './index.less';

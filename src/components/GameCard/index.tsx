@@ -9,7 +9,7 @@ interface Props {
   name: string;
 }
 
-const Card: FC<Props> = ({ name }: Props) => {
+const GameCard: FC<Props> = ({ name }: Props) => {
   const url = getRoute(name);
 
   const handleClick = useCallback(() => {
@@ -27,6 +27,6 @@ const Card: FC<Props> = ({ name }: Props) => {
   );
 };
 
-export { Card };
+export { GameCard };
 
-export default Card;
+export default GameCard;
