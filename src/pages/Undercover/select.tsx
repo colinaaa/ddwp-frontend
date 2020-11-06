@@ -1,4 +1,4 @@
-import Taro, { FC, navigateTo, showModal, useCallback, useMemo, useRouter, useState } from '@tarojs/taro';
+import Taro, { FC, useCallback, useMemo, useRouter, useState } from '@tarojs/taro';
 import { View, Image, Button } from '@tarojs/components';
 import classNames from 'classnames';
 
@@ -6,18 +6,16 @@ import GameHeader from '@components/GameHeader';
 import { useLazyQuery, useMutation, useSubscription } from '@hooks/useQuery';
 import {
   GameType,
-  werewolfRoomByNumber as getRoom,
-  werewolfRoomByNumberVariables as getRoomVariables,
-  WerewolfOnRoomUpdated as OnRoomUpdated,
-  WerewolfOnRoomUpdatedVariables as OnRoomUpdatedVariables,
-  werewolfSelectPos,
-  werewolfSelectPosVariables,
+  undercoverRoomByNumber as getRoom,
+  undercoverRoomByNumberVariables as getRoomVariables,
+  UndercoverOnRoomUpdated as OnRoomUpdated,
+  UndercoverOnRoomUpdatedVariables as OnRoomUpdatedVariables,
+  undercoverSelectPos,
+  undercoverSelectPosVariables,
 } from '@services/graphql';
 import { lock } from '@static/werewolf';
 
 import './select.less';
-import Modal from '@components/Modal';
-import { getImage } from './lineup';
 
 const MaxPlayersNumber = 16;
 
@@ -29,41 +27,41 @@ const Select: FC = () => {
   const [submitted, setSubmitted] = useState(false);
 
   const [room, setRoom] = useState<getRoom>({
-    werewolfRoomByNumber: {
+    undercoverRoomByNumber: {
       roomNumber: 0,
       players: [],
       playersNumber: 0,
-      __typename: 'WerewolfRoom',
-      gameType: GameType.Werewolf,
+      __typename: 'UnderCoverRoom',
+      gameType: GameType.Undercover,
       isEnd: false,
       isBegin: false,
-      gameConfig: { __typename: 'WerewolfConfig', totalNumber: 0, lineup: null },
+      gameConfig: { __typename: 'UnderCoverConfig', totalNumber: 0, lineup: null },
     },
   });
 
   useSubscription<OnRoomUpdated, OnRoomUpdatedVariables>(
-    'WEREWOLF_SUB_ROOM_UPDATED',
+    'UNDERCOVER_SUB_ROOM_UPDATED',
     { roomNumber },
     {
       onSubscriptionData: ({ subscriptionData: { data } }) =>
         data &&
-        data.werewolfRoomUpdated &&
-        setRoom(({ werewolfRoomByNumber }) => ({
-          werewolfRoomByNumber: { ...werewolfRoomByNumber, ...data.werewolfRoomUpdated },
+        data.undercoverRoomUpdated &&
+        setRoom(({ undercoverRoomByNumber }) => ({
+          undercoverRoomByNumber: { ...undercoverRoomByNumber, ...data.undercoverRoomUpdated },
         })),
     },
   );
 
-  const [select] = useMutation<werewolfSelectPos, werewolfSelectPosVariables>('WEREWOLF_SELECT_POSITION', {
-    onCompleted: ({ werewolfSelectPos }) =>
-      setRoom(({ werewolfRoomByNumber }) => ({
-        werewolfRoomByNumber: { ...werewolfRoomByNumber, ...werewolfSelectPos },
+  const [select] = useMutation<undercoverSelectPos, undercoverSelectPosVariables>('UNDERCOVER_SELECT_POSITION', {
+    onCompleted: ({ undercoverSelectPos }) =>
+      setRoom(({ undercoverRoomByNumber }) => ({
+        undercoverRoomByNumber: { ...undercoverRoomByNumber, ...undercoverSelectPos },
       })),
   });
 
-  const [queryRoom, { called }] = useLazyQuery<getRoom, getRoomVariables>('WEREWOLF_GET_ROOM', undefined, {
-    onCompleted: ({ werewolfRoomByNumber }) =>
-      setRoom((pre) => ({ werewolfRoomByNumber: { ...pre.werewolfRoomByNumber, ...werewolfRoomByNumber } })),
+  const [queryRoom, { called }] = useLazyQuery<getRoom, getRoomVariables>('UNDERCOVER_GET_ROOM', undefined, {
+    onCompleted: ({ undercoverRoomByNumber }) =>
+      setRoom((pre) => ({ undercoverRoomByNumber: { ...pre.undercoverRoomByNumber, ...undercoverRoomByNumber } })),
   });
 
   const handleSelect = (index: number) => () => {
@@ -81,7 +79,7 @@ const Select: FC = () => {
     queryRoom({ variables: { roomNumber } });
   }
 
-  const { players, playersNumber } = room.werewolfRoomByNumber;
+  const { players, playersNumber } = room.undercoverRoomByNumber;
 
   const selectedPositions = useMemo(
     () =>
@@ -94,21 +92,10 @@ const Select: FC = () => {
     [players],
   );
 
-  const charater = useMemo(() => submitted && selectedPositions.get(selected), [
-    submitted,
-    selected,
-    selectedPositions,
-  ]);
-
-  const handleClose = useCallback(() => {
-    navigateTo({ url: `show?charater=${charater}&pos=${selected + 1}` });
-  }, [charater, selected]);
-
   const handleConfirm = useCallback(async () => {
     const { errors } = await select({ variables: { roomNumber, pos: selected } });
     if (errors) {
       console.error(errors);
-      showModal({ title: '选择错误', content: errors.map(({ message }) => message).join(' ') });
       return false;
     }
     setSubmitted(true);
@@ -117,26 +104,7 @@ const Select: FC = () => {
   return (
     <View className='select'>
       <GameHeader roomNumber={roomNumber} />
-      {charater && (
-        <Modal
-          open={!!charater}
-          renderBadge={
-            <View>
-              <Button disabled className='select-modal-title'>
-                {charater}
-              </Button>
-            </View>
-          }
-          onlyConfirm
-          noTitle
-          title={charater}
-          onClose={handleClose}
-        >
-          <View className='select-modal-container'>
-            <Image className='select-modal-img' src={getImage(charater)} />
-          </View>
-        </Modal>
-      )}
+
       <View key={roomNumber} className='select-charaters'>
         {[...Array(MaxPlayersNumber).keys()].map((index) => (
           <View

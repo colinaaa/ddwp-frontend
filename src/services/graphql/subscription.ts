@@ -1,28 +1,10 @@
-import { gql } from 'taro-apollo-client';
+import { Subscription as werewolfSubscription } from './werewolf';
+import { Subscription as undercoverSubscription } from './undercover';
 
-const WEREWOLF_SUB_ROOM_UPDATED = gql`
-  subscription OnRoomUpdated($roomNumber: Int!) {
-    werewolfRoomUpdated(roomNumber: $roomNumber) {
-      roomNumber
-      playersNumber
-      players {
-        position
-        role
-      }
-      gameConfig {
-        totalNumber
-        lineup {
-          name
-          count
-        }
-      }
-      isBegin
-      isEnd
-    }
-  }
-`;
-
-const Subscription = { WEREWOLF_SUB_ROOM_UPDATED };
+const Subscription = {
+  ...werewolfSubscription,
+  ...undercoverSubscription,
+};
 
 export { Subscription };
 

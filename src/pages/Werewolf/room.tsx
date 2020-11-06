@@ -3,10 +3,10 @@ import { View, Text, Image, Button } from '@tarojs/components';
 import classNames from 'classnames';
 
 import {
-  getRoom,
-  getRoomVariables,
-  OnRoomUpdated,
-  OnRoomUpdatedVariables,
+  werewolfRoomByNumber as getRoom,
+  werewolfRoomByNumberVariables as getRoomVariables,
+  WerewolfOnRoomUpdated as OnRoomUpdated,
+  WerewolfOnRoomUpdatedVariables as OnRoomUpdatedVariables,
   werewolfDeal,
   werewolfDealVariables,
   werewolfEndGame,

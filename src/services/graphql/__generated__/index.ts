@@ -4,6 +4,388 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: undercoverSelectPos
+// ====================================================
+
+export interface undercoverSelectPos_undercoverSelectPos_players {
+  __typename: "Player";
+  /**
+   * 角色
+   */
+  role: string | null;
+  /**
+   * 位置
+   */
+  position: number;
+}
+
+export interface undercoverSelectPos_undercoverSelectPos {
+  __typename: "UnderCoverRoom";
+  /**
+   * 房间号
+   */
+  roomNumber: number;
+  /**
+   * 玩家信息
+   */
+  players: undercoverSelectPos_undercoverSelectPos_players[] | null;
+}
+
+export interface undercoverSelectPos {
+  /**
+   * 选择位置
+   */
+  undercoverSelectPos: undercoverSelectPos_undercoverSelectPos;
+}
+
+export interface undercoverSelectPosVariables {
+  pos: number;
+  roomNumber: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: undercoverDeal
+// ====================================================
+
+export interface undercoverDeal_undercoverDeal_players {
+  __typename: "Player";
+  /**
+   * 位置
+   */
+  position: number;
+  /**
+   * 角色
+   */
+  role: string | null;
+}
+
+export interface undercoverDeal_undercoverDeal {
+  __typename: "UnderCoverRoom";
+  /**
+   * 玩家信息
+   */
+  players: undercoverDeal_undercoverDeal_players[] | null;
+}
+
+export interface undercoverDeal {
+  /**
+   * 开始发牌
+   */
+  undercoverDeal: undercoverDeal_undercoverDeal;
+}
+
+export interface undercoverDealVariables {
+  roomNumber: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: undercoverEndGame
+// ====================================================
+
+export interface undercoverEndGame_undercoverEndGame {
+  __typename: "UnderCoverRoom";
+  /**
+   * 房间号
+   */
+  roomNumber: number;
+}
+
+export interface undercoverEndGame {
+  /**
+   * 结束游戏
+   */
+  undercoverEndGame: undercoverEndGame_undercoverEndGame;
+}
+
+export interface undercoverEndGameVariables {
+  roomNumber: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: undercoverJoinRoom
+// ====================================================
+
+export interface undercoverJoinRoom_undercoverJoinRoom_players {
+  __typename: "Player";
+  /**
+   * 位置
+   */
+  position: number;
+}
+
+export interface undercoverJoinRoom_undercoverJoinRoom {
+  __typename: "UnderCoverRoom";
+  /**
+   * 房间号
+   */
+  roomNumber: number;
+  /**
+   * 玩家信息
+   */
+  players: undercoverJoinRoom_undercoverJoinRoom_players[] | null;
+  /**
+   * 玩家人数
+   */
+  playersNumber: number;
+}
+
+export interface undercoverJoinRoom {
+  /**
+   * 加入房间
+   */
+  undercoverJoinRoom: undercoverJoinRoom_undercoverJoinRoom;
+}
+
+export interface undercoverJoinRoomVariables {
+  roomNumber: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: undercoverCreateRoom
+// ====================================================
+
+export interface undercoverCreateRoom_undercoverCreateRoom {
+  __typename: "UnderCoverRoom";
+  /**
+   * 房间号
+   */
+  roomNumber: number;
+  /**
+   * 玩家人数
+   */
+  playersNumber: number;
+}
+
+export interface undercoverCreateRoom {
+  /**
+   * 创建房间
+   */
+  undercoverCreateRoom: undercoverCreateRoom_undercoverCreateRoom;
+}
+
+export interface undercoverCreateRoomVariables {
+  config: InputGameConfig;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: undercoverRooms
+// ====================================================
+
+export interface undercoverRooms_undercoverRooms {
+  __typename: "UnderCoverRoom";
+  /**
+   * 房间号
+   */
+  roomNumber: number;
+}
+
+export interface undercoverRooms {
+  undercoverRooms: undercoverRooms_undercoverRooms[] | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: undercoverRoomByNumber
+// ====================================================
+
+export interface undercoverRoomByNumber_undercoverRoomByNumber_players {
+  __typename: "Player";
+  /**
+   * 角色
+   */
+  role: string | null;
+  /**
+   * 位置
+   */
+  position: number;
+}
+
+export interface undercoverRoomByNumber_undercoverRoomByNumber_gameConfig_lineup {
+  __typename: "Role";
+  /**
+   * 角色名称
+   */
+  name: string;
+  /**
+   * 角色数量
+   */
+  count: number;
+}
+
+export interface undercoverRoomByNumber_undercoverRoomByNumber_gameConfig {
+  __typename: "UnderCoverConfig";
+  /**
+   * 总人数
+   */
+  totalNumber: number;
+  /**
+   * 阵容
+   */
+  lineup: undercoverRoomByNumber_undercoverRoomByNumber_gameConfig_lineup[] | null;
+}
+
+export interface undercoverRoomByNumber_undercoverRoomByNumber {
+  __typename: "UnderCoverRoom";
+  /**
+   * 房间号
+   */
+  roomNumber: number;
+  /**
+   * 玩家信息
+   */
+  players: undercoverRoomByNumber_undercoverRoomByNumber_players[] | null;
+  /**
+   * 玩家人数
+   */
+  playersNumber: number;
+  /**
+   * 游戏类型
+   */
+  gameType: GameType;
+  /**
+   * 谁是卧底游戏配置
+   */
+  gameConfig: undercoverRoomByNumber_undercoverRoomByNumber_gameConfig;
+  /**
+   * 是否开始
+   */
+  isBegin: boolean | null;
+  /**
+   * 是否结束
+   */
+  isEnd: boolean | null;
+}
+
+export interface undercoverRoomByNumber {
+  /**
+   * 查询房间
+   */
+  undercoverRoomByNumber: undercoverRoomByNumber_undercoverRoomByNumber;
+}
+
+export interface undercoverRoomByNumberVariables {
+  roomNumber: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL subscription operation: UndercoverOnRoomUpdated
+// ====================================================
+
+export interface UndercoverOnRoomUpdated_undercoverRoomUpdated_players {
+  __typename: "Player";
+  /**
+   * 位置
+   */
+  position: number;
+  /**
+   * 角色
+   */
+  role: string | null;
+}
+
+export interface UndercoverOnRoomUpdated_undercoverRoomUpdated_gameConfig_lineup {
+  __typename: "Role";
+  /**
+   * 角色名称
+   */
+  name: string;
+  /**
+   * 角色数量
+   */
+  count: number;
+}
+
+export interface UndercoverOnRoomUpdated_undercoverRoomUpdated_gameConfig {
+  __typename: "UnderCoverConfig";
+  /**
+   * 总人数
+   */
+  totalNumber: number;
+  /**
+   * 阵容
+   */
+  lineup: UndercoverOnRoomUpdated_undercoverRoomUpdated_gameConfig_lineup[] | null;
+}
+
+export interface UndercoverOnRoomUpdated_undercoverRoomUpdated {
+  __typename: "UnderCoverRoom";
+  /**
+   * 房间号
+   */
+  roomNumber: number;
+  /**
+   * 玩家人数
+   */
+  playersNumber: number;
+  /**
+   * 玩家信息
+   */
+  players: UndercoverOnRoomUpdated_undercoverRoomUpdated_players[] | null;
+  /**
+   * 谁是卧底游戏配置
+   */
+  gameConfig: UndercoverOnRoomUpdated_undercoverRoomUpdated_gameConfig;
+  /**
+   * 是否开始
+   */
+  isBegin: boolean | null;
+  /**
+   * 是否结束
+   */
+  isEnd: boolean | null;
+}
+
+export interface UndercoverOnRoomUpdated {
+  /**
+   * 订阅房间变化
+   */
+  undercoverRoomUpdated: UndercoverOnRoomUpdated_undercoverRoomUpdated;
+}
+
+export interface UndercoverOnRoomUpdatedVariables {
+  roomNumber: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: werewolfSelectPos
 // ====================================================
 
@@ -193,10 +575,10 @@ export interface werewolfCreateRoomVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: getAllRooms
+// GraphQL query operation: werewolfRooms
 // ====================================================
 
-export interface getAllRooms_werewolfRooms {
+export interface werewolfRooms_werewolfRooms {
   __typename: "WerewolfRoom";
   /**
    * 房间号
@@ -204,8 +586,8 @@ export interface getAllRooms_werewolfRooms {
   roomNumber: number;
 }
 
-export interface getAllRooms {
-  werewolfRooms: getAllRooms_werewolfRooms[] | null;
+export interface werewolfRooms {
+  werewolfRooms: werewolfRooms_werewolfRooms[] | null;
 }
 
 /* tslint:disable */
@@ -214,10 +596,10 @@ export interface getAllRooms {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: getRoom
+// GraphQL query operation: werewolfRoomByNumber
 // ====================================================
 
-export interface getRoom_werewolfRoomByNumber_players {
+export interface werewolfRoomByNumber_werewolfRoomByNumber_players {
   __typename: "Player";
   /**
    * 角色
@@ -229,7 +611,7 @@ export interface getRoom_werewolfRoomByNumber_players {
   position: number;
 }
 
-export interface getRoom_werewolfRoomByNumber_gameConfig_lineup {
+export interface werewolfRoomByNumber_werewolfRoomByNumber_gameConfig_lineup {
   __typename: "Role";
   /**
    * 角色名称
@@ -241,7 +623,7 @@ export interface getRoom_werewolfRoomByNumber_gameConfig_lineup {
   count: number;
 }
 
-export interface getRoom_werewolfRoomByNumber_gameConfig {
+export interface werewolfRoomByNumber_werewolfRoomByNumber_gameConfig {
   __typename: "WerewolfConfig";
   /**
    * 总人数
@@ -250,10 +632,10 @@ export interface getRoom_werewolfRoomByNumber_gameConfig {
   /**
    * 阵容
    */
-  lineup: getRoom_werewolfRoomByNumber_gameConfig_lineup[] | null;
+  lineup: werewolfRoomByNumber_werewolfRoomByNumber_gameConfig_lineup[] | null;
 }
 
-export interface getRoom_werewolfRoomByNumber {
+export interface werewolfRoomByNumber_werewolfRoomByNumber {
   __typename: "WerewolfRoom";
   /**
    * 房间号
@@ -262,7 +644,7 @@ export interface getRoom_werewolfRoomByNumber {
   /**
    * 玩家信息
    */
-  players: getRoom_werewolfRoomByNumber_players[] | null;
+  players: werewolfRoomByNumber_werewolfRoomByNumber_players[] | null;
   /**
    * 玩家人数
    */
@@ -274,7 +656,7 @@ export interface getRoom_werewolfRoomByNumber {
   /**
    * 狼人杀游戏配置
    */
-  gameConfig: getRoom_werewolfRoomByNumber_gameConfig;
+  gameConfig: werewolfRoomByNumber_werewolfRoomByNumber_gameConfig;
   /**
    * 是否开始
    */
@@ -285,14 +667,14 @@ export interface getRoom_werewolfRoomByNumber {
   isEnd: boolean | null;
 }
 
-export interface getRoom {
+export interface werewolfRoomByNumber {
   /**
    * 查询房间
    */
-  werewolfRoomByNumber: getRoom_werewolfRoomByNumber;
+  werewolfRoomByNumber: werewolfRoomByNumber_werewolfRoomByNumber;
 }
 
-export interface getRoomVariables {
+export interface werewolfRoomByNumberVariables {
   roomNumber: number;
 }
 
@@ -302,10 +684,10 @@ export interface getRoomVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL subscription operation: OnRoomUpdated
+// GraphQL subscription operation: WerewolfOnRoomUpdated
 // ====================================================
 
-export interface OnRoomUpdated_werewolfRoomUpdated_players {
+export interface WerewolfOnRoomUpdated_werewolfRoomUpdated_players {
   __typename: "Player";
   /**
    * 位置
@@ -317,7 +699,7 @@ export interface OnRoomUpdated_werewolfRoomUpdated_players {
   role: string | null;
 }
 
-export interface OnRoomUpdated_werewolfRoomUpdated_gameConfig_lineup {
+export interface WerewolfOnRoomUpdated_werewolfRoomUpdated_gameConfig_lineup {
   __typename: "Role";
   /**
    * 角色名称
@@ -329,7 +711,7 @@ export interface OnRoomUpdated_werewolfRoomUpdated_gameConfig_lineup {
   count: number;
 }
 
-export interface OnRoomUpdated_werewolfRoomUpdated_gameConfig {
+export interface WerewolfOnRoomUpdated_werewolfRoomUpdated_gameConfig {
   __typename: "WerewolfConfig";
   /**
    * 总人数
@@ -338,10 +720,10 @@ export interface OnRoomUpdated_werewolfRoomUpdated_gameConfig {
   /**
    * 阵容
    */
-  lineup: OnRoomUpdated_werewolfRoomUpdated_gameConfig_lineup[] | null;
+  lineup: WerewolfOnRoomUpdated_werewolfRoomUpdated_gameConfig_lineup[] | null;
 }
 
-export interface OnRoomUpdated_werewolfRoomUpdated {
+export interface WerewolfOnRoomUpdated_werewolfRoomUpdated {
   __typename: "WerewolfRoom";
   /**
    * 房间号
@@ -354,11 +736,11 @@ export interface OnRoomUpdated_werewolfRoomUpdated {
   /**
    * 玩家信息
    */
-  players: OnRoomUpdated_werewolfRoomUpdated_players[] | null;
+  players: WerewolfOnRoomUpdated_werewolfRoomUpdated_players[] | null;
   /**
    * 狼人杀游戏配置
    */
-  gameConfig: OnRoomUpdated_werewolfRoomUpdated_gameConfig;
+  gameConfig: WerewolfOnRoomUpdated_werewolfRoomUpdated_gameConfig;
   /**
    * 是否开始
    */
@@ -369,14 +751,14 @@ export interface OnRoomUpdated_werewolfRoomUpdated {
   isEnd: boolean | null;
 }
 
-export interface OnRoomUpdated {
+export interface WerewolfOnRoomUpdated {
   /**
    * 订阅房间变化
    */
-  werewolfRoomUpdated: OnRoomUpdated_werewolfRoomUpdated;
+  werewolfRoomUpdated: WerewolfOnRoomUpdated_werewolfRoomUpdated;
 }
 
-export interface OnRoomUpdatedVariables {
+export interface WerewolfOnRoomUpdatedVariables {
   roomNumber: number;
 }
 
