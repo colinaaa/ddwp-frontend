@@ -1,0 +1,20 @@
+@import '../../styles/index.less';
+
+@image-width: 324px;
+@image-height: 486px;
+
+.undercover {
+  &-root {
+    .flex-center();
+    justify-content: space-evenly;
+    height: 100vh;
+    width: 100vw;
+
+    flex-direction: column;
+  }
+
+  &-img {
+    width: @image-width;
+    height: @image-height;
+  }
+}
