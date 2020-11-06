@@ -27,10 +27,23 @@ class App extends Component {
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
   config: Config = {
-    pages: ['pages/index/index', 'pages/rule/index', 'pages/help/index'],
+    pages: [
+      'pages/index/index',
+      'pages/rule/index',
+      'pages/help/index',
+      // 'pages/Werewolf/index',
+      // 'pages/Werewolf/create',
+      // 'pages/Werewolf/select',
+      // 'pages/Werewolf/room',
+      // 'pages/Werewolf/show',
+      // 'pages/Werewolf/intro',
+      // 'pages/Undercover/index',
+      // 'pages/Undercover/create',
+      // 'pages/Undercover/select',
+    ],
     subPackages: [
       { root: 'pages/Werewolf', pages: ['index', 'create', 'room', 'select', 'show', 'intro'] },
-      { root: 'pages/Undercover', pages: ['index', 'create', 'select'] },
+      { root: 'pages/Undercover', pages: ['index', 'create', 'select', 'room'] },
     ],
     window: {
       backgroundTextStyle: 'light',

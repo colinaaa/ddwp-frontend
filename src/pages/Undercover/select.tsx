@@ -1,9 +1,10 @@
-import Taro, { FC, useCallback, useMemo, useRouter, useState } from '@tarojs/taro';
+import Taro, { FC, navigateTo, useCallback, useEffect, useMemo, useState } from '@tarojs/taro';
 import { View, Image, Button } from '@tarojs/components';
 import classNames from 'classnames';
 
 import GameHeader from '@components/GameHeader';
 import { useLazyQuery, useMutation, useSubscription } from '@hooks/useQuery';
+import useRoomNumber from '@hooks/useRoomNumber';
 import {
   GameType,
   undercoverRoomByNumber as getRoom,
@@ -20,8 +21,7 @@ import './select.less';
 const MaxPlayersNumber = 16;
 
 const Select: FC = () => {
-  const { params } = useRouter();
-  const roomNumber = +params['roomNumber'];
+  const roomNumber = useRoomNumber();
 
   const [selected, setSelected] = useState(-1);
   const [submitted, setSubmitted] = useState(false);
@@ -30,7 +30,7 @@ const Select: FC = () => {
     undercoverRoomByNumber: {
       roomNumber: 0,
       players: [],
-      playersNumber: 0,
+      playersNumber: -1,
       __typename: 'UnderCoverRoom',
       gameType: GameType.Undercover,
       isEnd: false,
@@ -47,7 +47,10 @@ const Select: FC = () => {
         data &&
         data.undercoverRoomUpdated &&
         setRoom(({ undercoverRoomByNumber }) => ({
-          undercoverRoomByNumber: { ...undercoverRoomByNumber, ...data.undercoverRoomUpdated },
+          undercoverRoomByNumber: {
+            ...undercoverRoomByNumber,
+            ...data.undercoverRoomUpdated,
+          },
         })),
     },
   );
@@ -55,13 +58,21 @@ const Select: FC = () => {
   const [select] = useMutation<undercoverSelectPos, undercoverSelectPosVariables>('UNDERCOVER_SELECT_POSITION', {
     onCompleted: ({ undercoverSelectPos }) =>
       setRoom(({ undercoverRoomByNumber }) => ({
-        undercoverRoomByNumber: { ...undercoverRoomByNumber, ...undercoverSelectPos },
+        undercoverRoomByNumber: {
+          ...undercoverRoomByNumber,
+          ...undercoverSelectPos,
+        },
       })),
   });
 
   const [queryRoom, { called }] = useLazyQuery<getRoom, getRoomVariables>('UNDERCOVER_GET_ROOM', undefined, {
     onCompleted: ({ undercoverRoomByNumber }) =>
-      setRoom((pre) => ({ undercoverRoomByNumber: { ...pre.undercoverRoomByNumber, ...undercoverRoomByNumber } })),
+      setRoom((pre) => ({
+        undercoverRoomByNumber: {
+          ...pre.undercoverRoomByNumber,
+          ...undercoverRoomByNumber,
+        },
+      })),
   });
 
   const handleSelect = (index: number) => () => {
@@ -91,6 +102,12 @@ const Select: FC = () => {
       ),
     [players],
   );
+
+  useEffect(() => {
+    if (players && players.length === playersNumber) {
+      navigateTo({ url: `room?roomNumber=${roomNumber}&position=${selected}` });
+    }
+  }, [playersNumber, players, roomNumber]);
 
   const handleConfirm = useCallback(async () => {
     const { errors } = await select({ variables: { roomNumber, pos: selected } });
