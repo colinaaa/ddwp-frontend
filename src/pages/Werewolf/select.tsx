@@ -1,9 +1,11 @@
-import Taro, { FC, navigateTo, showModal, useCallback, useMemo, useRouter, useState } from '@tarojs/taro';
+import Taro, { FC, navigateTo, showModal, useCallback, useMemo, useState } from '@tarojs/taro';
 import { View, Image, Button } from '@tarojs/components';
 import classNames from 'classnames';
 
 import GameHeader from '@components/GameHeader';
 import { useLazyQuery, useMutation, useSubscription } from '@hooks/useQuery';
+import useRoomNumber from '@hooks/useRoomNumber';
+import Modal from '@components/Modal';
 import {
   GameType,
   werewolfRoomByNumber as getRoom,
@@ -14,16 +16,14 @@ import {
   werewolfSelectPosVariables,
 } from '@services/graphql';
 import { lock } from '@static/werewolf';
+import { getImage } from './lineup';
 
 import './select.less';
-import Modal from '@components/Modal';
-import { getImage } from './lineup';
 
 const MaxPlayersNumber = 16;
 
 const Select: FC = () => {
-  const { params } = useRouter();
-  const roomNumber = +params['roomNumber'];
+  const roomNumber = useRoomNumber();
 
   const [selected, setSelected] = useState(-1);
   const [submitted, setSubmitted] = useState(false);

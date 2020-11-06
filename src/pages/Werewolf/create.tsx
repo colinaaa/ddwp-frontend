@@ -12,8 +12,6 @@ import './create.less';
 
 const pagePath = '/pages/Werewolf/create';
 
-// interface Props {}
-
 const Create: FC = () => {
   const [cnt, setCnt] = useState(0);
   const [open, setOpen] = useState(false);
@@ -105,11 +103,9 @@ const Create: FC = () => {
       <View className='werewolf-padding' />
       <View className='werewolf-footer'>
         <Button onClick={handleSubmit}>确定阵容</Button>
-        {/* <Button onClick={() => setOpen(!open)}>open</Button> */}
       </View>
     </View>
   );
-  // const roomNumber = router.params['roomNumber'];
   return card;
 };
 

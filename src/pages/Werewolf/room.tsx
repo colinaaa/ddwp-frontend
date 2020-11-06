@@ -1,4 +1,4 @@
-import Taro, { FC, navigateTo, useCallback, useMemo, useRouter, useState } from '@tarojs/taro';
+import Taro, { FC, navigateTo, useCallback, useMemo, useState } from '@tarojs/taro';
 import { View, Text, Image, Button } from '@tarojs/components';
 import classNames from 'classnames';
 
@@ -15,11 +15,11 @@ import {
 import { useLazyQuery, useMutation, useSubscription } from '@hooks/useQuery';
 import { god, question, back, lock } from '@static/werewolf';
 import GameHeader from '@components/GameHeader';
+import useSelectedPositions from '@hooks/useSelectedPositions';
+import useRoomNumber from '@hooks/useRoomNumber';
 
 import './room.less';
 import { getImageFont } from './lineup';
-import useSelectedPositions from '@hooks/useSelectedPositions';
-
 interface Props {
   roomNumber?: number;
 }
@@ -27,8 +27,7 @@ interface Props {
 const MaxPlayersNumber = 16;
 
 const Room: FC<Props> = () => {
-  const router = useRouter();
-  const roomNumber = +router.params['roomNumber'];
+  const roomNumber = useRoomNumber();
 
   const [submitted, setSubmitted] = useState(false);
   const [deadArray, setDeadArray] = useState<Array<boolean>>(() => Array(MaxPlayersNumber).fill(false));
