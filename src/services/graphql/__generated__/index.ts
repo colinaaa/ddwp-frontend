@@ -28,7 +28,7 @@ export interface undercoverSelectPos_undercoverSelectPos {
   /**
    * 玩家信息
    */
-  players: undercoverSelectPos_undercoverSelectPos_players[] | null;
+  players: undercoverSelectPos_undercoverSelectPos_players[];
 }
 
 export interface undercoverSelectPos {
@@ -69,7 +69,7 @@ export interface undercoverDeal_undercoverDeal {
   /**
    * 玩家信息
    */
-  players: undercoverDeal_undercoverDeal_players[] | null;
+  players: undercoverDeal_undercoverDeal_players[];
 }
 
 export interface undercoverDeal {
@@ -137,7 +137,7 @@ export interface undercoverJoinRoom_undercoverJoinRoom {
   /**
    * 玩家信息
    */
-  players: undercoverJoinRoom_undercoverJoinRoom_players[] | null;
+  players: undercoverJoinRoom_undercoverJoinRoom_players[];
   /**
    * 玩家人数
    */
@@ -262,7 +262,7 @@ export interface undercoverRoomByNumber_undercoverRoomByNumber {
   /**
    * 玩家信息
    */
-  players: undercoverRoomByNumber_undercoverRoomByNumber_players[] | null;
+  players: undercoverRoomByNumber_undercoverRoomByNumber_players[];
   /**
    * 玩家人数
    */
@@ -354,7 +354,7 @@ export interface UndercoverOnRoomUpdated_undercoverRoomUpdated {
   /**
    * 玩家信息
    */
-  players: UndercoverOnRoomUpdated_undercoverRoomUpdated_players[] | null;
+  players: UndercoverOnRoomUpdated_undercoverRoomUpdated_players[];
   /**
    * 谁是卧底游戏配置
    */
@@ -410,7 +410,7 @@ export interface werewolfSelectPos_werewolfSelectPos {
   /**
    * 玩家信息
    */
-  players: werewolfSelectPos_werewolfSelectPos_players[] | null;
+  players: werewolfSelectPos_werewolfSelectPos_players[];
 }
 
 export interface werewolfSelectPos {
@@ -451,7 +451,7 @@ export interface werewolfDeal_werewolfDeal {
   /**
    * 玩家信息
    */
-  players: werewolfDeal_werewolfDeal_players[] | null;
+  players: werewolfDeal_werewolfDeal_players[];
 }
 
 export interface werewolfDeal {
@@ -519,7 +519,7 @@ export interface werewolfJoinRoom_werewolfJoinRoom {
   /**
    * 玩家信息
    */
-  players: werewolfJoinRoom_werewolfJoinRoom_players[] | null;
+  players: werewolfJoinRoom_werewolfJoinRoom_players[];
   /**
    * 玩家人数
    */
@@ -644,7 +644,7 @@ export interface werewolfRoomByNumber_werewolfRoomByNumber {
   /**
    * 玩家信息
    */
-  players: werewolfRoomByNumber_werewolfRoomByNumber_players[] | null;
+  players: werewolfRoomByNumber_werewolfRoomByNumber_players[];
   /**
    * 玩家人数
    */
@@ -736,7 +736,7 @@ export interface WerewolfOnRoomUpdated_werewolfRoomUpdated {
   /**
    * 玩家信息
    */
-  players: WerewolfOnRoomUpdated_werewolfRoomUpdated_players[] | null;
+  players: WerewolfOnRoomUpdated_werewolfRoomUpdated_players[];
   /**
    * 狼人杀游戏配置
    */
