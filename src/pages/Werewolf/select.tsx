@@ -2,23 +2,16 @@ import Taro, { FC, navigateTo, showModal, useCallback, useMemo, useState } from 
 import { View, Image, Button } from '@tarojs/components';
 import classNames from 'classnames';
 
-import GameHeader from '@components/GameHeader';
-import { useLazyQuery, useMutation, useSubscription } from '@hooks/useQuery';
-import useRoomNumber from '@hooks/useRoomNumber';
 import Modal from '@components/Modal';
-import {
-  GameType,
-  werewolfRoomByNumber as getRoom,
-  werewolfRoomByNumberVariables as getRoomVariables,
-  WerewolfOnRoomUpdated as OnRoomUpdated,
-  WerewolfOnRoomUpdatedVariables as OnRoomUpdatedVariables,
-  werewolfSelectPos,
-  werewolfSelectPosVariables,
-} from '@services/graphql';
+import GameHeader from '@components/GameHeader';
+import { useMutation } from '@hooks/useQuery';
+import useRoomNumber from '@hooks/useRoomNumber';
+import { useWerewolfRoom } from '@hooks/useRoom';
+import { werewolfSelectPos, werewolfSelectPosVariables } from '@services/graphql';
 import { lock } from '@static/werewolf';
-import { getImage } from './lineup';
 
 import './select.less';
+import { getImage } from './lineup';
 
 const MaxPlayersNumber = 16;
 
@@ -28,43 +21,11 @@ const Select: FC = () => {
   const [selected, setSelected] = useState(-1);
   const [submitted, setSubmitted] = useState(false);
 
-  const [room, setRoom] = useState<getRoom>({
-    werewolfRoomByNumber: {
-      roomNumber: 0,
-      players: [],
-      playersNumber: 0,
-      __typename: 'WerewolfRoom',
-      gameType: GameType.Werewolf,
-      isEnd: false,
-      isBegin: false,
-      gameConfig: { __typename: 'WerewolfConfig', totalNumber: 0, lineup: null },
-    },
-  });
+  const {
+    data: { playersNumber, players },
+  } = useWerewolfRoom(roomNumber);
 
-  useSubscription<OnRoomUpdated, OnRoomUpdatedVariables>(
-    'WEREWOLF_SUB_ROOM_UPDATED',
-    { roomNumber },
-    {
-      onSubscriptionData: ({ subscriptionData: { data } }) =>
-        data &&
-        data.werewolfRoomUpdated &&
-        setRoom(({ werewolfRoomByNumber }) => ({
-          werewolfRoomByNumber: { ...werewolfRoomByNumber, ...data.werewolfRoomUpdated },
-        })),
-    },
-  );
-
-  const [select] = useMutation<werewolfSelectPos, werewolfSelectPosVariables>('WEREWOLF_SELECT_POSITION', {
-    onCompleted: ({ werewolfSelectPos }) =>
-      setRoom(({ werewolfRoomByNumber }) => ({
-        werewolfRoomByNumber: { ...werewolfRoomByNumber, ...werewolfSelectPos },
-      })),
-  });
-
-  const [queryRoom, { called }] = useLazyQuery<getRoom, getRoomVariables>('WEREWOLF_GET_ROOM', undefined, {
-    onCompleted: ({ werewolfRoomByNumber }) =>
-      setRoom((pre) => ({ werewolfRoomByNumber: { ...pre.werewolfRoomByNumber, ...werewolfRoomByNumber } })),
-  });
+  const [select] = useMutation<werewolfSelectPos, werewolfSelectPosVariables>('WEREWOLF_SELECT_POSITION');
 
   const handleSelect = (index: number) => () => {
     if (submitted) {
@@ -76,12 +37,6 @@ const Select: FC = () => {
     }
     setSelected(index);
   };
-
-  if (roomNumber && !called) {
-    queryRoom({ variables: { roomNumber } });
-  }
-
-  const { players, playersNumber } = room.werewolfRoomByNumber;
 
   const selectedPositions = useMemo(
     () =>
