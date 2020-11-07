@@ -1,12 +1,12 @@
 import Taro, { FC } from '@tarojs/taro';
 import { View, Text, Button, Image } from '@tarojs/components';
 
+import Card from '@components/Card';
 import useRoomNumber from '@hooks/useRoomNumber';
 import usePosition from '@hooks/usePosition';
-import Card from '@components/Card';
+import { useUndercoverRoom } from '@hooks/useRoom';
 
 import { lock } from '@static/werewolf';
-import { useUndercoverRoom } from '@hooks/useRoom';
 
 const Room: FC = () => {
   const roomNumber = useRoomNumber();

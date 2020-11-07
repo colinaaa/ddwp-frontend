@@ -53,9 +53,11 @@ const useWerewolfRoom = (roomNumber: number): QueryResult<Room> => {
     const unsubscribe = subscribeToMore({
       document: Subscription.WEREWOLF_SUB_ROOM_UPDATED,
       variables: { roomNumber },
-      updateQuery: (prev, { subscriptionData: { data } }) => ({
-        ...prev,
-        ...data.werewolfRoomByNumber,
+      updateQuery: ({ werewolfRoomByNumber }, { subscriptionData: { data } }) => ({
+        werewolfRoomByNumber: {
+          ...werewolfRoomByNumber,
+          ...data.werewolfRoomByNumber,
+        },
       }),
     });
 
@@ -92,9 +94,11 @@ const useUndercoverRoom = (roomNumber: number): QueryResult<Room> => {
     const unsubscribe = subscribeToMore({
       document: Subscription.UNDERCOVER_SUB_ROOM_UPDATED,
       variables: { roomNumber },
-      updateQuery: (prev, { subscriptionData: { data } }) => ({
-        ...prev,
-        ...data.undercoverRoomByNumber,
+      updateQuery: ({ undercoverRoomByNumber }, { subscriptionData: { data } }) => ({
+        undercoverRoomByNumber: {
+          ...undercoverRoomByNumber,
+          ...data.undercoverRoomByNumber,
+        },
       }),
     });
 
