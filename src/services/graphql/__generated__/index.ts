@@ -305,7 +305,7 @@ export interface undercoverRoomByNumberVariables {
 // GraphQL subscription operation: UndercoverOnRoomUpdated
 // ====================================================
 
-export interface UndercoverOnRoomUpdated_undercoverRoomUpdated_players {
+export interface UndercoverOnRoomUpdated_undercoverRoomByNumber_players {
   __typename: "Player";
   /**
    * 位置
@@ -317,7 +317,7 @@ export interface UndercoverOnRoomUpdated_undercoverRoomUpdated_players {
   role: string | null;
 }
 
-export interface UndercoverOnRoomUpdated_undercoverRoomUpdated_gameConfig_lineup {
+export interface UndercoverOnRoomUpdated_undercoverRoomByNumber_gameConfig_lineup {
   __typename: "Role";
   /**
    * 角色名称
@@ -329,7 +329,7 @@ export interface UndercoverOnRoomUpdated_undercoverRoomUpdated_gameConfig_lineup
   count: number;
 }
 
-export interface UndercoverOnRoomUpdated_undercoverRoomUpdated_gameConfig {
+export interface UndercoverOnRoomUpdated_undercoverRoomByNumber_gameConfig {
   __typename: "UnderCoverConfig";
   /**
    * 总人数
@@ -338,10 +338,10 @@ export interface UndercoverOnRoomUpdated_undercoverRoomUpdated_gameConfig {
   /**
    * 阵容
    */
-  lineup: UndercoverOnRoomUpdated_undercoverRoomUpdated_gameConfig_lineup[] | null;
+  lineup: UndercoverOnRoomUpdated_undercoverRoomByNumber_gameConfig_lineup[] | null;
 }
 
-export interface UndercoverOnRoomUpdated_undercoverRoomUpdated {
+export interface UndercoverOnRoomUpdated_undercoverRoomByNumber {
   __typename: "UnderCoverRoom";
   /**
    * 房间号
@@ -354,11 +354,11 @@ export interface UndercoverOnRoomUpdated_undercoverRoomUpdated {
   /**
    * 玩家信息
    */
-  players: UndercoverOnRoomUpdated_undercoverRoomUpdated_players[];
+  players: UndercoverOnRoomUpdated_undercoverRoomByNumber_players[];
   /**
    * 谁是卧底游戏配置
    */
-  gameConfig: UndercoverOnRoomUpdated_undercoverRoomUpdated_gameConfig;
+  gameConfig: UndercoverOnRoomUpdated_undercoverRoomByNumber_gameConfig;
   /**
    * 是否开始
    */
@@ -373,7 +373,7 @@ export interface UndercoverOnRoomUpdated {
   /**
    * 订阅房间变化
    */
-  undercoverRoomUpdated: UndercoverOnRoomUpdated_undercoverRoomUpdated;
+  undercoverRoomByNumber: UndercoverOnRoomUpdated_undercoverRoomByNumber;
 }
 
 export interface UndercoverOnRoomUpdatedVariables {
@@ -687,7 +687,7 @@ export interface werewolfRoomByNumberVariables {
 // GraphQL subscription operation: WerewolfOnRoomUpdated
 // ====================================================
 
-export interface WerewolfOnRoomUpdated_werewolfRoomUpdated_players {
+export interface WerewolfOnRoomUpdated_werewolfRoomByNumber_players {
   __typename: "Player";
   /**
    * 位置
@@ -699,7 +699,7 @@ export interface WerewolfOnRoomUpdated_werewolfRoomUpdated_players {
   role: string | null;
 }
 
-export interface WerewolfOnRoomUpdated_werewolfRoomUpdated_gameConfig_lineup {
+export interface WerewolfOnRoomUpdated_werewolfRoomByNumber_gameConfig_lineup {
   __typename: "Role";
   /**
    * 角色名称
@@ -711,7 +711,7 @@ export interface WerewolfOnRoomUpdated_werewolfRoomUpdated_gameConfig_lineup {
   count: number;
 }
 
-export interface WerewolfOnRoomUpdated_werewolfRoomUpdated_gameConfig {
+export interface WerewolfOnRoomUpdated_werewolfRoomByNumber_gameConfig {
   __typename: "WerewolfConfig";
   /**
    * 总人数
@@ -720,10 +720,10 @@ export interface WerewolfOnRoomUpdated_werewolfRoomUpdated_gameConfig {
   /**
    * 阵容
    */
-  lineup: WerewolfOnRoomUpdated_werewolfRoomUpdated_gameConfig_lineup[] | null;
+  lineup: WerewolfOnRoomUpdated_werewolfRoomByNumber_gameConfig_lineup[] | null;
 }
 
-export interface WerewolfOnRoomUpdated_werewolfRoomUpdated {
+export interface WerewolfOnRoomUpdated_werewolfRoomByNumber {
   __typename: "WerewolfRoom";
   /**
    * 房间号
@@ -736,11 +736,11 @@ export interface WerewolfOnRoomUpdated_werewolfRoomUpdated {
   /**
    * 玩家信息
    */
-  players: WerewolfOnRoomUpdated_werewolfRoomUpdated_players[];
+  players: WerewolfOnRoomUpdated_werewolfRoomByNumber_players[];
   /**
    * 狼人杀游戏配置
    */
-  gameConfig: WerewolfOnRoomUpdated_werewolfRoomUpdated_gameConfig;
+  gameConfig: WerewolfOnRoomUpdated_werewolfRoomByNumber_gameConfig;
   /**
    * 是否开始
    */
@@ -755,7 +755,7 @@ export interface WerewolfOnRoomUpdated {
   /**
    * 订阅房间变化
    */
-  werewolfRoomUpdated: WerewolfOnRoomUpdated_werewolfRoomUpdated;
+  werewolfRoomByNumber: WerewolfOnRoomUpdated_werewolfRoomByNumber;
 }
 
 export interface WerewolfOnRoomUpdatedVariables {

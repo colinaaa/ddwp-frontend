@@ -1573,7 +1573,7 @@
         "description": null,
         "fields": [
           {
-            "name": "werewolfRoomUpdated",
+            "name": "werewolfRoomByNumber",
             "description": "订阅房间变化",
             "args": [
               {
@@ -1604,7 +1604,7 @@
             "deprecationReason": null
           },
           {
-            "name": "undercoverRoomUpdated",
+            "name": "undercoverRoomByNumber",
             "description": "订阅房间变化",
             "args": [
               {

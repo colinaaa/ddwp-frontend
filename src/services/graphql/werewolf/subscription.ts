@@ -2,7 +2,7 @@ import { gql } from 'taro-apollo-client';
 
 const WEREWOLF_SUB_ROOM_UPDATED = gql`
   subscription WerewolfOnRoomUpdated($roomNumber: Int!) {
-    werewolfRoomUpdated(roomNumber: $roomNumber) {
+    werewolfRoomByNumber(roomNumber: $roomNumber) {
       roomNumber
       playersNumber
       players {

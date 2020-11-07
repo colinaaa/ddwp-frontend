@@ -2,7 +2,7 @@ import { gql } from 'taro-apollo-client';
 
 const UNDERCOVER_SUB_ROOM_UPDATED = gql`
   subscription UndercoverOnRoomUpdated($roomNumber: Int!) {
-    undercoverRoomUpdated(roomNumber: $roomNumber) {
+    undercoverRoomByNumber(roomNumber: $roomNumber) {
       roomNumber
       playersNumber
       players {
