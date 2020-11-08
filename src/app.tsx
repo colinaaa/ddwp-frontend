@@ -43,7 +43,7 @@ class App extends Component {
     ],
     subPackages: [
       { root: 'pages/Werewolf', pages: ['index', 'create', 'room', 'select', 'show', 'intro'] },
-      { root: 'pages/Undercover', pages: ['index', 'create', 'select', 'room'] },
+      { root: 'pages/Undercover', pages: ['index', 'create', 'select', 'room', 'intro'] },
     ],
     window: {
       backgroundTextStyle: 'light',

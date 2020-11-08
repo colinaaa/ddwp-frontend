@@ -2,7 +2,7 @@ import Taro, { Component, Config } from '@tarojs/taro';
 import { View, Image } from '@tarojs/components';
 
 import { Game } from '@components/Game';
-import { cover } from '@static/werewolf';
+import { cover } from '@static/undercover';
 
 import './index.less';
 
