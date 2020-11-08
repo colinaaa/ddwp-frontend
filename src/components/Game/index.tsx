@@ -81,6 +81,10 @@ const Game: FC<Props> = ({ name }) => {
   );
 };
 
+Game.defaultProps = {
+  name: '',
+};
+
 export { Game };
 
 export default Game;

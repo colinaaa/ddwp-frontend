@@ -19,6 +19,10 @@ const GameHeader: FC<Props> = ({ roomNumber }) => {
   );
 };
 
+GameHeader.defaultProps = {
+  roomNumber: -1,
+};
+
 export { GameHeader };
 
 export default GameHeader;

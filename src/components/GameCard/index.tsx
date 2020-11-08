@@ -27,6 +27,10 @@ const GameCard: FC<Props> = ({ name }: Props) => {
   );
 };
 
+GameCard.defaultProps = {
+  name: '',
+};
+
 export { GameCard };
 
 export default GameCard;

@@ -85,6 +85,10 @@ const Modal: FC<Props> = ({
   );
 };
 
+Modal.defaultProps = {
+  open: false,
+};
+
 export { Modal };
 
 export default Modal;
