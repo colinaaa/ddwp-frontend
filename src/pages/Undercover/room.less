@@ -1,0 +1,109 @@
+@import '../../styles/index.less';
+
+.room {
+  height: 100vh;
+  width: 100vw;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &-header {
+    width: 664px;
+    height: 164px;
+    background: #ffffff;
+    box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.05);
+    border-radius: 25px;
+
+    .flex-center();
+    flex-direction: column;
+
+    &-title {
+      width: 76px;
+      height: 49px;
+      font-size: 35px;
+      font-family: PingFangSC-Medium, PingFang SC;
+      font-weight: 500;
+      color: #000000;
+      line-height: 49px;
+      letter-spacing: 2px;
+    }
+
+    &-position {
+      .flex-center();
+
+      &-text {
+        display: inline;
+        font-size: 20px;
+        font-weight: 500;
+        color: #000000;
+        line-height: 28px;
+        letter-spacing: 1px;
+        font-family: PingFangSC-Medium, PingFang SC;
+      }
+
+      &-span {
+        .flex-center();
+        margin-left: 13px;
+        width: 44px;
+        height: 40px;
+        background: #f6f6f6;
+        border-radius: 12px;
+        font-size: 20px;
+        font-family: PingFangSC-Medium, PingFang SC;
+        font-weight: 500;
+        color: #000000;
+        line-height: 28px;
+        letter-spacing: 1px;
+      }
+    }
+  }
+
+  &-players {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+
+    &-card {
+      width: 155px;
+      height: 174px;
+      background: #ffffff;
+      border-radius: 25px;
+      .flex-center();
+
+      &-btn {
+        width: 155px;
+        height: 174px;
+        line-height: 174px;
+        background: #ffffff;
+        border-radius: 25px;
+        opacity: 1;
+        transition: opactiy 200ms ease-in-out;
+        &:after {
+          border: none;
+        }
+      }
+
+      &-dead {
+        opacity: 0.1;
+        // color: #d2d2d2;
+      }
+
+      &-deadtext {
+        font-size: 22px;
+        opacity: 0;
+        transition: opacity 200ms ease-in-out;
+        position: absolute;
+
+        &-active {
+          opacity: 1;
+        }
+      }
+
+      &-lock {
+        width: 51px;
+        height: 59px;
+      }
+    }
+  }
+}

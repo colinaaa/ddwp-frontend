@@ -15,6 +15,7 @@ const WEREWOLF_GET_ROOM = gql`
       players {
         role
         position
+        isOut
       }
       playersNumber
       gameType

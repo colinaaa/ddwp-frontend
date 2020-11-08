@@ -14,6 +14,7 @@ import { useQuery } from '@hooks/useQuery';
 interface Player {
   position: number;
   role: string | null;
+  isOut: boolean | null;
 }
 
 interface Role {

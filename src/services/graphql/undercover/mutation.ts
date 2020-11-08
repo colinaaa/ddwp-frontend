@@ -1,5 +1,18 @@
 import { gql } from 'taro-apollo-client';
 
+const UNDERCOVER_SOMEONE_OUT = gql`
+  mutation undercoverSomeoneOut($roomNumber: Int!, $index: Int!) {
+    undercoverSomeoneOut(index: $index, roomNumber: $roomNumber) {
+      roomNumber
+      players {
+        role
+        position
+        isOut
+      }
+    }
+  }
+`;
+
 const UNDERCOVER_SELECT_POSITION = gql`
   mutation undercoverSelectPos($pos: Int!, $roomNumber: Int!) {
     undercoverSelectPos(position: $pos, roomNumber: $roomNumber) {
@@ -58,6 +71,7 @@ const Mutation = {
   UNDERCOVER_SELECT_POSITION,
   UNDERCOVER_JOIN_ROOM,
   UNDERCOVER_END_GAME,
+  UNDERCOVER_SOMEONE_OUT,
 };
 
 export { Mutation };

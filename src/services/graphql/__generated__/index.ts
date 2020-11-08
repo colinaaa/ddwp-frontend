@@ -4,6 +4,55 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: undercoverSomeoneOut
+// ====================================================
+
+export interface undercoverSomeoneOut_undercoverSomeoneOut_players {
+  __typename: "Player";
+  /**
+   * 角色
+   */
+  role: string | null;
+  /**
+   * 位置
+   */
+  position: number;
+  /**
+   * 是否出局
+   */
+  isOut: boolean | null;
+}
+
+export interface undercoverSomeoneOut_undercoverSomeoneOut {
+  __typename: "UnderCoverRoom";
+  /**
+   * 房间号
+   */
+  roomNumber: number;
+  /**
+   * 玩家信息
+   */
+  players: undercoverSomeoneOut_undercoverSomeoneOut_players[];
+}
+
+export interface undercoverSomeoneOut {
+  /**
+   * 选择玩家出局
+   */
+  undercoverSomeoneOut: undercoverSomeoneOut_undercoverSomeoneOut;
+}
+
+export interface undercoverSomeoneOutVariables {
+  roomNumber: number;
+  index: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: undercoverSelectPos
 // ====================================================
 
@@ -227,6 +276,10 @@ export interface undercoverRoomByNumber_undercoverRoomByNumber_players {
    * 位置
    */
   position: number;
+  /**
+   * 是否出局
+   */
+  isOut: boolean | null;
 }
 
 export interface undercoverRoomByNumber_undercoverRoomByNumber_gameConfig_lineup {
@@ -609,6 +662,10 @@ export interface werewolfRoomByNumber_werewolfRoomByNumber_players {
    * 位置
    */
   position: number;
+  /**
+   * 是否出局
+   */
+  isOut: boolean | null;
 }
 
 export interface werewolfRoomByNumber_werewolfRoomByNumber_gameConfig_lineup {
