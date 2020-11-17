@@ -3678,10 +3678,10 @@ babel-plugin-transform-flow-strip-types@^6.22.0:
     babel-plugin-syntax-flow "^6.18.0"
     babel-runtime "^6.22.0"
 
-babel-plugin-transform-jsx-stylesheet@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/babel-plugin-transform-jsx-stylesheet/-/babel-plugin-transform-jsx-stylesheet-1.0.0.tgz#c911cd12f9ce6f930f34191eca8ddec8df4c5675"
-  integrity sha512-fjldCbFTxj89IyyfIeqFc1HelZl25a89IHnooXVMLIP9x4AeaeuVk9VpzuUbrTjpaypW1XqwGsqhqgxMmEjgIw==
+babel-plugin-transform-jsx-stylesheet@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/babel-plugin-transform-jsx-stylesheet/-/babel-plugin-transform-jsx-stylesheet-1.0.1.tgz#a386c2384df7042be55253888020be9eb9cd3159"
+  integrity sha512-crbBhIT5rYJcvdc1Vxqo3jvR2qO2j4RA5cYGi2fmk1jFx9oBwtnYmEX0i7uddsa7V+FwxH6Kh27MoY4ZXHQ7RQ==
   dependencies:
     camelcase "^3.0.0"
 
