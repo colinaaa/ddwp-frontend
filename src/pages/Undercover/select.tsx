@@ -3,17 +3,10 @@ import { View, Image, Button } from '@tarojs/components';
 import classNames from 'classnames';
 
 import GameHeader from '@components/GameHeader';
-import { useLazyQuery, useMutation, useSubscription } from '@hooks/useQuery';
+import { useMutation } from '@hooks/useQuery';
 import useRoomNumber from '@hooks/useRoomNumber';
-import {
-  GameType,
-  undercoverRoomByNumber as getRoom,
-  undercoverRoomByNumberVariables as getRoomVariables,
-  UndercoverOnRoomUpdated as OnRoomUpdated,
-  UndercoverOnRoomUpdatedVariables as OnRoomUpdatedVariables,
-  undercoverSelectPos,
-  undercoverSelectPosVariables,
-} from '@services/graphql';
+import { useUndercoverRoom } from '@hooks/useRoom';
+import { undercoverSelectPos, undercoverSelectPosVariables } from '@services/graphql';
 import { lock } from '@static/werewolf';
 
 import './select.less';
@@ -26,54 +19,11 @@ const Select: FC = () => {
   const [selected, setSelected] = useState(-1);
   const [submitted, setSubmitted] = useState(false);
 
-  const [room, setRoom] = useState<getRoom>({
-    undercoverRoomByNumber: {
-      roomNumber: 0,
-      players: [],
-      playersNumber: -1,
-      __typename: 'UnderCoverRoom',
-      gameType: GameType.Undercover,
-      isEnd: false,
-      isBegin: false,
-      gameConfig: { __typename: 'UnderCoverConfig', totalNumber: 0, lineup: null },
-    },
-  });
+  const {
+    data: { players, playersNumber },
+  } = useUndercoverRoom(roomNumber);
 
-  useSubscription<OnRoomUpdated, OnRoomUpdatedVariables>(
-    'UNDERCOVER_SUB_ROOM_UPDATED',
-    { roomNumber },
-    {
-      onSubscriptionData: ({ subscriptionData: { data } }) =>
-        data &&
-        data.undercoverRoomUpdated &&
-        setRoom(({ undercoverRoomByNumber }) => ({
-          undercoverRoomByNumber: {
-            ...undercoverRoomByNumber,
-            ...data.undercoverRoomUpdated,
-          },
-        })),
-    },
-  );
-
-  const [select] = useMutation<undercoverSelectPos, undercoverSelectPosVariables>('UNDERCOVER_SELECT_POSITION', {
-    onCompleted: ({ undercoverSelectPos }) =>
-      setRoom(({ undercoverRoomByNumber }) => ({
-        undercoverRoomByNumber: {
-          ...undercoverRoomByNumber,
-          ...undercoverSelectPos,
-        },
-      })),
-  });
-
-  const [queryRoom, { called }] = useLazyQuery<getRoom, getRoomVariables>('UNDERCOVER_GET_ROOM', undefined, {
-    onCompleted: ({ undercoverRoomByNumber }) =>
-      setRoom((pre) => ({
-        undercoverRoomByNumber: {
-          ...pre.undercoverRoomByNumber,
-          ...undercoverRoomByNumber,
-        },
-      })),
-  });
+  const [select] = useMutation<undercoverSelectPos, undercoverSelectPosVariables>('UNDERCOVER_SELECT_POSITION');
 
   const handleSelect = (index: number) => () => {
     if (submitted) {
@@ -85,12 +35,6 @@ const Select: FC = () => {
     }
     setSelected(index);
   };
-
-  if (roomNumber && !called) {
-    queryRoom({ variables: { roomNumber } });
-  }
-
-  const { players, playersNumber } = room.undercoverRoomByNumber;
 
   const selectedPositions = useMemo(
     () =>
