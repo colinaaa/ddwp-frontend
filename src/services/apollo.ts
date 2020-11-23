@@ -2,6 +2,7 @@ import { ApolloClient, InMemoryCache, HttpLink, split } from 'taro-apollo-client
 import { getMainDefinition } from 'taro-apollo-client/utilities';
 import { WebSocketLink } from 'taro-apollo-client/link/ws';
 import Taro from '@tarojs/taro';
+import { captureException } from 'sentry-miniapp';
 
 import { GraphQLEndpoint, WsEndpoint } from '@config/const';
 
@@ -38,6 +39,11 @@ const wsLink = new WebSocketLink({
   uri: WsEndpoint,
   options: {
     reconnect: true,
+    connectionCallback: (error) => {
+      if (error) {
+        error.map((err) => captureException(err));
+      }
+    },
   },
   webSocketImpl: WebSocket,
 });

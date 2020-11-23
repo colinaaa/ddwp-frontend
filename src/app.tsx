@@ -1,9 +1,20 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import Taro, { Component, Config } from '@tarojs/taro';
+import Taro, { Component, Config, onError } from '@tarojs/taro';
+import * as Sentry from 'sentry-miniapp';
 
 import Index from './pages/index';
 
 import './app.less';
+
+// init Sentry
+// init options: https://github.com/getsentry/sentry-javascript/blob/master/packages/types/src/options.ts
+Sentry.init({
+  dsn: 'https://ba1939d57d364496bcdf58a5d9cd66cb@o479242.ingest.sentry.io/5523568',
+  // ...
+});
+
+onError((error) => Sentry.captureException(error));
+
 // 如果需要在 h5 环境中开启 Taro Devtools
 // 取消以下注释：
 // if (process.env.NODE_ENV !== 'production' && process.env.TARO_ENV === 'h5')  {

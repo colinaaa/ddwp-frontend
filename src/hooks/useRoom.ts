@@ -1,5 +1,6 @@
 import { useEffect } from '@tarojs/taro';
 import { ApolloError, NetworkStatus } from 'taro-apollo-client';
+import * as Sentry from 'sentry-miniapp';
 
 import {
   werewolfRoomByNumber,
@@ -60,6 +61,7 @@ const useWerewolfRoom = (roomNumber: number): QueryResult<Room> => {
           ...data.werewolfRoomByNumber,
         },
       }),
+      onError: (error) => Sentry.captureException(error),
     });
 
     return unsubscribe;
@@ -101,6 +103,7 @@ const useUndercoverRoom = (roomNumber: number): QueryResult<Room> => {
           ...data.undercoverRoomByNumber,
         },
       }),
+      onError: (error) => Sentry.captureException(error),
     });
 
     return unsubscribe;
