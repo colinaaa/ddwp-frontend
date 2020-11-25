@@ -49,7 +49,7 @@ const useWerewolfRoom = (roomNumber: number): QueryResult<Room> => {
   const { data, subscribeToMore, error, loading, networkStatus } = useQuery<
     werewolfRoomByNumber,
     werewolfRoomByNumberVariables
-  >('WEREWOLF_GET_ROOM', { roomNumber });
+  >('WEREWOLF_GET_ROOM', { roomNumber }, { skip: !roomNumber });
 
   useEffect(() => {
     const unsubscribe = subscribeToMore({
@@ -91,7 +91,7 @@ const useUndercoverRoom = (roomNumber: number): QueryResult<Room> => {
   const { data, subscribeToMore, error, loading, networkStatus } = useQuery<
     undercoverRoomByNumber,
     undercoverRoomByNumberVariables
-  >('UNDERCOVER_GET_ROOM', { roomNumber });
+  >('UNDERCOVER_GET_ROOM', { roomNumber }, { skip: !roomNumber });
 
   useEffect(() => {
     const unsubscribe = subscribeToMore({
