@@ -12975,10 +12975,10 @@ sentence-case@^3.0.3:
     tslib "^1.10.0"
     upper-case-first "^2.0.1"
 
-sentry-miniapp@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/sentry-miniapp/-/sentry-miniapp-0.10.0.tgz#6ed59bbb6406f55b1f95e6524bb09c5f0078d3d7"
-  integrity sha512-MKdcGqWfJ0gbnwbD0QFBFqcL+cjlf59m4dch5YjEg4Ng6ZxT7X80Av0+m7Zov39A7zZSAExw0gOafyiqh6MM+Q==
+sentry-miniapp@^0.11.0:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/sentry-miniapp/-/sentry-miniapp-0.11.0.tgz#068a798235c0df6e5a870312dc2b55bd922a1b4f"
+  integrity sha512-HdK2QboKp072fKdY93EDhoFt6Vtk6cHXxS40jN5LTIOs52Dr+VInJZV/Ep1SDU9x+74w4rBgBAzXtB0DAp0uRA==
   dependencies:
     "@sentry/core" "5.15.4"
     "@sentry/types" "5.15.4"
