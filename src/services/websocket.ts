@@ -8,6 +8,7 @@ import {
   onSocketOpen,
   sendSocketMessage,
 } from '@tarojs/taro';
+import { captureMessage } from 'sentry-miniapp';
 
 class WebSocket {
   private static _instance: WebSocket | null = null;
@@ -27,6 +28,7 @@ class WebSocket {
         'content-type': 'application/json',
       },
       protocols: typeof protocols === 'string' ? [protocols] : protocols,
+      fail: ({ errMsg }) => captureMessage(`connectSocket: ${errMsg}`),
     });
 
     onSocketClose((data) => {
@@ -68,6 +70,7 @@ class WebSocket {
 
     sendSocketMessage({
       data,
+      fail: ({ errMsg }) => captureMessage(`sendSocketMessage: ${errMsg}`),
     });
   }
 
@@ -82,6 +85,7 @@ class WebSocket {
       complete: () => {
         this.readyState = WebSocket.CLOSED;
       },
+      fail: ({ errMsg }) => captureMessage(`closeSocket: ${errMsg}`),
     });
   }
 
