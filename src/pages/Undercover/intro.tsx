@@ -1,7 +1,7 @@
 import Taro, { FC } from '@tarojs/taro';
 import { ScrollView, Image } from '@tarojs/components';
 
-import { intro } from '@static/werewolf';
+import { intro } from '@static/undercover';
 
 import './intro.less';
 
