@@ -65,7 +65,7 @@ const useWerewolfRoom = (roomNumber: number): QueryResult<Room> => {
     });
 
     return unsubscribe;
-  }, []);
+  }, [roomNumber]);
 
   if (!data) {
     return {
@@ -107,7 +107,7 @@ const useUndercoverRoom = (roomNumber: number): QueryResult<Room> => {
     });
 
     return unsubscribe;
-  }, []);
+  }, [roomNumber]);
 
   if (!data) {
     return {
